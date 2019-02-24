@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content: blob:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>BALDUR</title>
+    </head>
+    <body>
+        <div class="app">
+            <div class="pantalla oculto">
+                <img id="logo" src="img/logo.png" class="img" alt="">
+                <img id="cargando" src="img/elemento_cargando.png" class="img" alt="">
+                <div id="texto_carga">
+                    <div>...dios de la paz, la pureza, la</div>
+                    <div>justicia y <span class="bold">la luz...</span></div> 
+                </div>
+            </div>
+            <div class="pantalla inicio">
+                <div class="title">BALDUR</div>
+                <div class="subtitle">Combate la oscuridad con el poder de las estrellas</div>
+                <img src="img/boton_continuar.png" id="btnContinuar" class="img" alt="">
+                <img src="img/boton_opciones.png" id="btnOpciones" class="img" alt="">
+                <img src="img/musica_on.png" alt="" id="btnMusica">
+                <img src="" alt="" id="btnCreditos">
+            </div>
+        </div>
+        <script type="text/javascript" src="js/phaser.min.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
