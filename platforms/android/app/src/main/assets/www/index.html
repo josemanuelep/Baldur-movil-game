@@ -9,23 +9,25 @@
         <title>BALDUR</title>
     </head>
     <body>
-        <div class="app">
-            <div class="pantalla oculto">
-                <img id="logo" src="img/logo.png" class="img" alt="">
-                <img id="cargando" src="img/elemento_cargando.png" class="img" alt="">
+        <div id="app" class="app">
+            <section id="pantalla_carga" class="pantalla">
+                <div><img id="logo" src="img/logo.png" class="img" alt=""></div>
+                <div><img id="cargando" src="img/elemento_cargando.png" class="img" alt=""></div>
                 <div id="texto_carga">
                     <div>...dios de la paz, la pureza, la</div>
                     <div>justicia y <span class="bold">la luz...</span></div> 
                 </div>
-            </div>
-            <div class="pantalla inicio">
+            </section>
+            <section id="pantalla_inicio" class="pantalla inicio oculto">
                 <div class="title">BALDUR</div>
                 <div class="subtitle">Combate la oscuridad con el poder de las estrellas</div>
                 <img src="img/boton_continuar.png" id="btnContinuar" class="img" alt="">
                 <img src="img/boton_opciones.png" id="btnOpciones" class="img" alt="">
                 <img src="img/musica_on.png" alt="" id="btnMusica">
                 <img src="" alt="" id="btnCreditos">
-            </div>
+            </section>
+
+            <section id="game" class="pantalla oculto"></section>
         </div>
         <script type="text/javascript" src="js/phaser.min.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
