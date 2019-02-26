@@ -6,28 +6,40 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/animate.css">
+
         <title>BALDUR</title>
     </head>
     <body>
         <div id="app" class="app">
-            <section id="pantalla_carga" class="pantalla">
+            <div id="pantalla_carga" class="pantalla">
                 <img id="logo" src="img/logo.png" class="img" alt="">
                 <img id="cargando" src="img/elemento_cargando.png" class="img" alt="">
                 <div id="texto_carga">
                     <div>...dios de la paz, la pureza, la</div>
                     <div>justicia y <span class="bold">la luz...</span></div> 
                 </div>
-            </section>
-            <section id="pantalla_inicio" class="pantalla oculto">
+            </div>
+            <div id="pantalla_inicio" class="pantalla oculto">
                 <div class="title">BALDUR</div>
                 <div class="subtitle">Combate la oscuridad con el poder de las estrellas</div>
                 <img src="img/boton_continuar.png" id="btnContinuar" class="img" alt="">
                 <img src="img/boton_opciones.png" id="btnOpciones" class="img" alt="">
                 <img src="img/musica_on.png" alt="" id="btnMusica">
                 <img src="" alt="" id="btnCreditos">
-            </section>
+            </div>
+            <div id="pantalla_opciones" class="pantalla oculto">
+                <div id="txt_opciones">OPCIONES</div>
+                <img src="img/opcion_menu.png" alt="" id="opcion_menu" class="opcion_arriba opcion_izquierda">
+                <img src="img/opcion_personajes.png" alt="" id="opcion_personajes" class="opcion_arriba opcion_derecha">
+                <img src="img/opcion_musica_on.png" alt="" id="opcion_musica" class="opcion_abajo opcion_izquierda">
+                <img src="img/opcion_creditos.png" alt="" id="opcion_creditos" class="opcion_abajo opcion_derecha">
+                <img src="img/boton_volver.png" alt="" id="boton_volver">
+            </div>
 
-            <section id="game" class="pantalla oculto"></section>
+            <div id="game" class="pantalla oculto">
+
+            </div>
         </div>
         <script type="text/javascript" src="js/phaser.min.js"></script>
         <script type="text/javascript" src="js/game.js"></script>

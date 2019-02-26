@@ -28,7 +28,11 @@ body {
     padding:0px;
     width:100%;
 }
-
+#app{
+    background-color: #2e2e2e;
+    width: 360px;
+    height: 640px;
+}
 .pantalla{
     width: 360px;
     height: 640px;
@@ -115,6 +119,41 @@ img{
     top: 205px;
 }
 
+#txt_opciones{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 100px;
+    font-family: 'Akrobat';
+    font-style: normal;
+    font-size: 28px;
+    color: #ecdeb5;
+}
+
+.opcion_arriba{
+    position: absolute;
+    top: 200px;
+    
+}
+
+.opcion_abajo{
+    position: absolute;
+    top: 380px;
+}
+
+.opcion_derecha{
+    right: 55px;
+}
+
+.opcion_izquierda{
+    left: 55px;
+}
+
+#boton_volver{
+    position: absolute;
+    bottom: 24px;
+    right: 153px;
+}
 
 @font-face {
     font-family: 'Akrobat';
