@@ -45,7 +45,6 @@ body {
     display: none;
 }
 
-
 img{
     position: absolute;
 }
@@ -64,16 +63,7 @@ img{
     bottom: 35%;
 }
 
-.bold{
-    font-weight: bold;
-}
-
 #texto_carga{
-    font-family: 'Akrobat';
-    font-style: normal;
-    font-weight: 100;
-    font-size: 16pt;
-    color: #ecdeb5;
     position: absolute;
     right: 24px;
     bottom: 24px;
@@ -84,9 +74,12 @@ img{
     top: 290px;
 }
 
-#btnOpciones{
+.btnOpciones{
     position: absolute;
     bottom: 24px;
+}
+
+#pantalla_inicio .btnOpciones{
     left: 24px;
 }
 
@@ -96,27 +89,44 @@ img{
     right: 24px;
 }
 
-.title{
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    top: 115px;
+h1{
+    
     font-family: 'Exodus Striped';
     font-style: normal;
     font-size: 55pt;
     color: #ecdeb5;
 }
 
-.subtitle{
+h2{
+    font-family: 'Akrobat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16pt;
+    color: #ecdeb5;
+}
+
+h3{
     font-family: 'Akrobat';
     font-style: normal;
     font-weight: 100;
-    font-size: 12pt;
+    font-size: 13pt;
     color: #ecdeb5;
+}
+
+#title{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 115px;
+    margin: 0;
+}
+
+#subtitle{
     position: absolute;
     width: 100%;
     text-align: center;
     top: 205px;
+    margin: 0;
 }
 
 #txt_opciones{
@@ -124,16 +134,12 @@ img{
     width: 100%;
     text-align: center;
     top: 100px;
-    font-family: 'Akrobat';
-    font-style: normal;
     font-size: 28px;
-    color: #ecdeb5;
 }
 
 .opcion_arriba{
     position: absolute;
     top: 200px;
-    
 }
 
 .opcion_abajo{
@@ -153,6 +159,31 @@ img{
     position: absolute;
     bottom: 24px;
     right: 153px;
+}
+
+#txt_nivel{
+    position: absolute;
+    font-size: 27px;
+    width: 100%;
+    text-align: center;
+    top: 66px;
+}
+
+#mensaje_nivel{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 105px;
+}
+
+#boton_mapa{
+    position: absolute;
+    top:180px;
+    left:137px;
+}
+
+#pantalla_mapa .btnOpciones{
+    left: 147.5px;
 }
 
 @font-face {
