@@ -25,7 +25,7 @@ var game = new Phaser.Game(config);
 var sprite;
 var scoreText;
 var score = 0;
-
+var btnOpciones;
 function preload ()
 {   
     cargarImagenes(this);
@@ -54,8 +54,14 @@ function create ()
     //iconos del juego
     this.add.image(24, 24,'conteo').setOrigin(0);
     scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
-    this.add.image(308, 24,'opciones_juego').setOrigin(0);    
+    btnOpciones = this.add.sprite(308, 24,'opciones_juego').setInteractive();
+    btnOpciones.setOrigin(0);
     
+    btnOpciones.on('pointerdown',function () {
+        asteroids.setVelocity(0,0);
+        stars.setVelocity(0,0);
+        cambiarPantalla(pantalla_game, pantalla_opciones);
+    });
     
     //Grupo de asteroides, es decir los obstaculos
     var asteroids = this.physics.add.group();
@@ -95,6 +101,8 @@ function create ()
     this.physics.add.collider(sprite, asteroids);
 
     this.physics.add.overlap(sprite, stars, collectStar, null, this);
+
+    
 }
 
 function update ()
