@@ -10,7 +10,6 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
             gravity: { y: 0 }
         }
     },
@@ -25,6 +24,7 @@ var config = {
 var game = new Phaser.Game(config);
 var sprite;
 var scoreText;
+var score = 0;
 
 function preload ()
 {   
@@ -35,6 +35,7 @@ function preload ()
 }
 
 function cargarImagenes(game){
+    //Aca se cargan la imagenes del juego, es decir los sprites
     game.load.image('fondo_juego','../img/fondo_juego.gif');
     game.load.image('dude','../img/personaje.png');
     game.load.image('conteo','../img/simbolo_conteo_estrellas.png')
@@ -48,11 +49,26 @@ function cargarImagenes(game){
 
 function create ()
 {
-    
+    //Asignar le fondo del juego
     this.add.image(180, 320, 'fondo_juego');
-
+    //iconos del juego
+    this.add.image(24, 24,'conteo').setOrigin(0);
+    scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
+    this.add.image(308, 24,'opciones_juego').setOrigin(0);    
     
-    asteroids = this.physics.add.group();
+    
+    //Grupo de asteroides, es decir los obstaculos
+    var asteroids = this.physics.add.group();
+    //Grupo de estrellas
+    var stars = this.physics.add.group();
+
+    //Estrellas
+    for (let i = 0; i < 40; i++) {
+
+        stars.create(randomNum(30,330), randomNum(0,-8400),"conteo");
+    }
+
+    //Cilos for para crear los obstaculos
     for (let i = 0; i < 6; i++) {
         asteroids.create(25, (i*(-1400)),"asteroide_izquierda_grande").body.setCircle(110);
     }
@@ -65,21 +81,20 @@ function create ()
     for (let i = 0; i < 6; i++) {
         asteroids.create(335, (i*(-1400))-1050,"asteroide_derecha_grande").body.setCircle(110);
     }
-    asteroids.setVelocity(0,200);
 
+    asteroids.setVelocity(0,200);
+    stars.setVelocity(0,100);
+
+    //Personaje
     sprite = this.add.image(180, 560, 'dude');
 
+    //Fisica del video juego
     this.physics.world.enable(sprite);
-    
     sprite.body.setCollideWorldBounds(true);
     sprite.setInteractive({ draggable: true });
-
-    this.add.image(24, 24,'conteo').setOrigin(0);
-    this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
-    this.add.image(308, 24,'opciones_juego').setOrigin(0);    
-    
-    
     this.physics.add.collider(sprite, asteroids);
+
+    this.physics.add.overlap(sprite, stars, collectStar, null, this);
 }
 
 function update ()
@@ -87,6 +102,15 @@ function update ()
     sprite.on('drag', function (pointer, dragX, dragY) {
         this.x = dragX;
     });
+}
+
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+
+    //  Add and update the score
+    score += 10;
+    scoreText.setText('Score: ' + score);
 }
 
 function asignarEventos(){
