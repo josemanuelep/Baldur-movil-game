@@ -24,8 +24,12 @@ var config = {
 var game = new Phaser.Game(config);
 var sprite;
 var scoreText;
+var checkp1;
 var score = 0;
 var btnOpciones;
+var asteroids;
+var stars;
+
 function preload ()
 {   
     cargarImagenes(this);
@@ -44,13 +48,25 @@ function cargarImagenes(game){
     game.load.image('asteroide_derecha_pequeño','../img/asteroide_derecha_pequeño.png');
     game.load.image('asteroide_izquierda_pequeño','../img/asteroide_izquierda_pequeño.png');
     game.load.image('opciones_juego','../img/opciones_juego.png');
+    game.load.image('estrella','../img/estrellas_recolectar_juego.png');
+    game.load.image('check1','../img/check_point.png');
     
 }
 
+function esPar(numero) {
+    if(numero % 2 == 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 function create ()
 {
-    //Asignar le fondo del juego
+    //Asignar el fondo del juego
     this.add.image(180, 320, 'fondo_juego');
+
     //iconos del juego
     this.add.image(24, 24,'conteo').setOrigin(0);
     scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
@@ -64,14 +80,29 @@ function create ()
     });
     
     //Grupo de asteroides, es decir los obstaculos
-    var asteroids = this.physics.add.group();
+    asteroids = this.physics.add.group();
     //Grupo de estrellas
-    var stars = this.physics.add.group();
+    stars = this.physics.add.group();
+    //Checks points
+    checkp1 = this.physics.add.group();
+    
 
-    //Estrellas
+    //Estrellas 
     for (let i = 0; i < 40; i++) {
 
-        stars.create(randomNum(30,330), randomNum(0,-8400),"conteo");
+        var star = stars.create(randomNum(30,330), randomNum(0,-9000),"estrella");
+        
+        //Definir el tamaño de las estrellas
+        if (esPar(i)) {
+
+            star.setScale(1.8);
+
+            
+        } else {
+
+            star.setScale(1);
+            
+        }
     }
 
     //Cilos for para crear los obstaculos
@@ -99,19 +130,26 @@ function create ()
     sprite.body.setCollideWorldBounds(true);
     sprite.setInteractive({ draggable: true });
     this.physics.add.collider(sprite, asteroids);
-
+    //Recolector de estrellas
     this.physics.add.overlap(sprite, stars, collectStar, null, this);
-
-    
+   
+ 
 }
 
 function update ()
 {
+    
     sprite.on('drag', function (pointer, dragX, dragY) {
         this.x = dragX;
     });
 }
 
+function check(player, checkp1)
+{
+    checkp1.disableBody(true, true);
+    
+    
+}
 function collectStar (player, star)
 {
     star.disableBody(true, true);
@@ -119,6 +157,19 @@ function collectStar (player, star)
     //  Add and update the score
     score += 10;
     scoreText.setText('Score: ' + score);
+
+    //llegada al checkpoint
+    if (score==40) {
+
+        checkp1.create(160,350,"check1");
+        this.physics.add.overlap(sprite, checkp1, check, null, this);
+        checkp1.setVelocity(0,120);
+        asteroids.setVelocity(0);
+        stars.setVelocity(0);
+        
+        
+        
+    }
 }
 
 function asignarEventos(){

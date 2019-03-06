@@ -10,7 +10,6 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
             gravity: { y: 0 }
         }
     },
@@ -25,7 +24,8 @@ var config = {
 var game = new Phaser.Game(config);
 var sprite;
 var scoreText;
-
+var score = 0;
+var btnOpciones;
 function preload ()
 {   
     cargarImagenes(this);
@@ -35,6 +35,7 @@ function preload ()
 }
 
 function cargarImagenes(game){
+    //Aca se cargan la imagenes del juego, es decir los sprites
     game.load.image('fondo_juego','../img/fondo_juego.gif');
     game.load.image('dude','../img/personaje.png');
     game.load.image('conteo','../img/simbolo_conteo_estrellas.png')
@@ -42,53 +43,111 @@ function cargarImagenes(game){
     game.load.image('asteroide_izquierda_grande','../img/asteroide_izquierda_grande.png');
     game.load.image('asteroide_derecha_pequeño','../img/asteroide_derecha_pequeño.png');
     game.load.image('asteroide_izquierda_pequeño','../img/asteroide_izquierda_pequeño.png');
+    game.load.image('opciones_juego','../img/opciones_juego.png');
+    game.load.image('estrella','../img/estrellas_recolectar_juego.png');
+    game.load.image('check1','../img/check_point.png');
+    
 }
+
+function esPar(numero) {
+    if(numero % 2 == 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
 function create ()
 {
-    
+    //Asignar el fondo del juego
     this.add.image(180, 320, 'fondo_juego');
+
+    //iconos del juego
+    this.add.image(24, 24,'conteo').setOrigin(0);
+    scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
+    btnOpciones = this.add.sprite(308, 24,'opciones_juego').setInteractive();
+    btnOpciones.setOrigin(0);
     
-    asteroids = this.physics.add.group();
+    btnOpciones.on('pointerdown',function () {
+        asteroids.setVelocity(0,0);
+        stars.setVelocity(0,0);
+        cambiarPantalla(pantalla_game, pantalla_opciones);
+    });
+    
+    //Grupo de asteroides, es decir los obstaculos
+    var asteroids = this.physics.add.group();
+    //Grupo de estrellas
+    var stars = this.physics.add.group();
+    //Checks points
+    var check_point1 = this.add.group();
+    check_point1.create(160,-200,"check1");
+
+    //Estrellas 
+    for (let i = 0; i < 40; i++) {
+
+        var star = stars.create(randomNum(30,330), randomNum(0,-9000),"estrella");
+        
+        //Definir el tamaño de las estrellas
+        if (esPar(i)) {
+
+            star.setScale(1.8);
+
+            
+        } else {
+
+            star.setScale(1);
+            
+        }
+    }
+
+    //Cilos for para crear los obstaculos
     for (let i = 0; i < 6; i++) {
         asteroids.create(25, (i*(-1400)),"asteroide_izquierda_grande").body.setCircle(110);
     }
     for (let i = 0; i < 6; i++) {
-        asteroids.create(280, (i*(-1400))-350,"asteroide_derecha_pequeño").body.setCircle(80);
-        
+        asteroids.create(randomNum(100,200), (i*(-1400))-350,"asteroide_derecha_pequeño").body.setCircle(80);
     }
     for (let i = 0; i < 6; i++) {
-        asteroids.create(80, (i*(-1400))-700,"asteroide_izquierda_pequeño").body.setCircle(80);
-        
+        asteroids.create(randomNum(160,260), (i*(-1400))-700,"asteroide_izquierda_pequeño").body.setCircle(80);
     }
     for (let i = 0; i < 6; i++) {
         asteroids.create(335, (i*(-1400))-1050,"asteroide_derecha_grande").body.setCircle(110);
-        
     }
-    // asteroids.create(280, -350,"asteroide_derecha_pequeño").body.setCircle(80);
-    // asteroids.create(80, -700,"asteroide_izquierda_pequeño").body.setCircle(80);
-    // asteroids.create(335, -1050,"asteroide_derecha_grande").body.setCircle(110);
-    asteroids.setVelocity(0,500);
 
+    check_point1.setVelocity(0,85);
+    asteroids.setVelocity(0,200);
+    stars.setVelocity(0,100);
+
+    //Personaje
     sprite = this.add.image(180, 560, 'dude');
 
+    //Fisica del video juego
     this.physics.world.enable(sprite);
-    
     sprite.body.setCollideWorldBounds(true);
     sprite.setInteractive({ draggable: true });
+    this.physics.add.collider(sprite, asteroids);
 
-    this.add.image(24, 24,'conteo').setOrigin(0);
-    this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
+    this.physics.add.overlap(sprite, stars, collectStar, null, this);
 
     
-    //this.physics.add.collider(sprite, asteroids);
 }
 
 function update ()
 {
+    
     sprite.on('drag', function (pointer, dragX, dragY) {
         this.x = dragX;
     });
+}
+
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+
+    //  Add and update the score
+    score += 10;
+    scoreText.setText('Score: ' + score);
 }
 
 function asignarEventos(){
@@ -151,4 +210,8 @@ function asignarEventoMapa(){
     btn_mapa.addEventListener("click", function(){
         cambiarPantalla(pantalla_mapa, pantalla_game);
     });
+}
+
+function randomNum(max,min){
+    return Math.floor(Math.random() * ((max+1) - min) + min);
 }
