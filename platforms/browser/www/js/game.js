@@ -28,11 +28,16 @@ var scoreText;
 var checkp1;
 var score = 0;
 var btnOpciones;
+var bntRestart;
 var asteroids;
 var stars;
 var timedEvent;
 var isChoque =  false;
 var counAsteroids = 0;
+var progress = 0;
+var fails=0;
+var collectedStars=0;
+var currentCheckPoint=0;
 
 
 function preload ()
@@ -56,6 +61,7 @@ function cargarImagenes(game){
     game.load.image('opciones_juego','../img/opciones_juego.png');
     game.load.image('estrella','../img/estrellas_recolectar_juego.png');
     game.load.image('check1','../img/check_point.png');
+    game.load.image('btnNuevaPartida','../img/boton_nueva_partida.png');
     
 }
 
@@ -70,7 +76,7 @@ function create ()
     btnOpciones = this.add.sprite(308, 24,'opciones_juego').setInteractive();
     btnOpciones.setOrigin(0);
 
-    //Botones
+    //Botones acciones
     btnOpciones.on('pointerdown',function () {
         asteroids.setVelocity(0,0);
         cambiarPantalla(pantalla_game, pantalla_opciones);
@@ -99,8 +105,7 @@ function create ()
     this.physics.add.overlap(sprite, checkp1, check, null, this);
 
     //Detectar la colision entre Baldur y los asteroides
-    this.physics.add.overlap(sprite, asteroids, choque, null, this);
-   
+    this.physics.add.overlap(sprite, asteroids, choque, null, this);   
  
 }
 
@@ -194,10 +199,12 @@ function createAsteroids() {
 function choque(){
 
     isChoque = true;
+    bntRestart = this.add.sprite(130,300,'btnNuevaPartida').setInteractive();
+    game.state.start(game.state.current);
+    bntRestart.setOrigin(0);
+    bntRestart.setScale(1.5);
     asteroids.setVelocity(0,0);
     stars.setVelocity(0,0);
-
-
 }
 
 function check(player, checkp1)
@@ -215,12 +222,13 @@ function collectStar (player, star)
     scoreText.setText('Score: ' + score);
 
     //llegada al checkpoint
-    if (score==40||counAsteroids>1) {
+    if (score==40||counAsteroids>10) {
 
         //Checks points
         checkp1 = this.physics.add.group();
         isChoque = true;
         var ch = checkp1.create(160,350,"check1");
+        ch.setAlpha(0, 0, 1, 1);
         ch.body.setCollideWorldBounds(true);
         ch.setVelocity(0,120);
 
