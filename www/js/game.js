@@ -52,6 +52,7 @@ function cargarImagenes(game){
     game.load.image('asteroide_izquierda_grande','../img/asteroide_izquierda_grande.png');
     game.load.image('asteroide_derecha_pequeño','../img/asteroide_derecha_pequeño.png');
     game.load.image('asteroide_izquierda_pequeño','../img/asteroide_izquierda_pequeño.png');
+    game.load.image('msmCheck','../img/frase_check_point.png');
     game.load.image('opciones_juego','../img/opciones_juego.png');
     game.load.image('estrella','../img/estrellas_recolectar_juego.png');
     game.load.image('check1','../img/check_point.png');
@@ -214,7 +215,7 @@ function collectStar (player, star)
     scoreText.setText('Score: ' + score);
 
     //llegada al checkpoint
-    if (score==40||counAsteroids>10) {
+    if (score==40||counAsteroids>1) {
 
         //Checks points
         checkp1 = this.physics.add.group();
@@ -223,6 +224,8 @@ function collectStar (player, star)
         ch.body.setCollideWorldBounds(true);
         ch.setVelocity(0,120);
 
+        //Annadir el mensaje de checkpoint
+        this.add.image(180, 180,'msmCheck')
         //Detener las estrellas
         asteroids.setVelocity(0,0);
         stars.setVelocity(0,0);
