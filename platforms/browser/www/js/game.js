@@ -1,121 +1,148 @@
-var gameOver = false;
-var checkpoints = [false, false, false];
-var btnContinuar, btnOpciones, opcion_menu, opcion_personajes, opcion_musica, opcion_creditos, btn_volver, btn_mapa ;
 
-var config = {
-    type: Phaser.AUTO,
-    width: 360,
-    height: 640,
-    parent:"pantalla_game",
-    physics: {
-        default: 'arcade',
-        arcade: {
-            debug: true,
-            gravity: { y: 0 }
+startNewGame();
+
+function startNewGame(){
+
+    var gameOver = false;
+    var checkpoints = [false, false, false];
+    var btnContinuar, btnOpciones, opcion_menu, opcion_personajes, opcion_musica, opcion_creditos, btn_volver, btn_mapa ;
+    
+    var config = {
+        type: Phaser.AUTO,
+        width: 360,
+        height: 640,
+        parent:"pantalla_game",
+        physics: {
+            default: 'arcade',
+            arcade: {
+                debug: true,
+                gravity: { y: 0 }
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
         }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
+    };
+        
+    
+    var game = new Phaser.Game(config);
+    var sprite;
+    var scoreText;
+    var checkp1;
+    var score = 0;
+    var btnOpciones;
+    var bntRestart;
+    var asteroids;
+    var stars;
+    var timedEvent;
+    var isChoque =  false;
+    var counAsteroids = 0;
+    var progress = 0;
+    var fails=0;
+    var collectedStars=0;
+    var currentCheckPoint=0;
+    var bandera = 0;
+    var banderaPausa;
+    
+    
+    function preload ()
+    {   
+        cargarImagenes(this);
+        cargarBotones();
+        asignarEventos();
+        //cambiarPantalla(pantalla_carga, pantalla_inicio);
     }
-};
     
-
-var game = new Phaser.Game(config);
-var sprite;
-var scoreText;
-var checkp1;
-var score = 0;
-var btnOpciones;
-var bntRestart;
-var asteroids;
-var stars;
-var timedEvent;
-var isChoque =  false;
-var counAsteroids = 0;
-var progress = 0;
-var fails=0;
-var collectedStars=0;
-var currentCheckPoint=0;
-
-
-function preload ()
-{   
-    cargarImagenes(this);
-    cargarBotones();
-    asignarEventos();
-    //cambiarPantalla(pantalla_carga, pantalla_inicio);
-}
-
-function cargarImagenes(game){
-    //Aca se cargan la imagenes del juego, es decir los sprites
-    game.load.image('fondo_juego','../img/fondo_juego.gif');
-    game.load.image('dude','../img/personaje.png');
-    game.load.image('conteo','../img/simbolo_conteo_estrellas.png')
-    game.load.image('asteroide_derecha_grande','../img/asteroide_derecha_grande.png');
-    game.load.image('asteroide_izquierda_grande','../img/asteroide_izquierda_grande.png');
-    game.load.image('asteroide_derecha_pequeño','../img/asteroide_derecha_pequeño.png');
-    game.load.image('asteroide_izquierda_pequeño','../img/asteroide_izquierda_pequeño.png');
-    game.load.image('msmCheck','../img/frase_check_point.png');
-    game.load.image('opciones_juego','../img/opciones_juego.png');
-    game.load.image('estrella','../img/estrellas_recolectar_juego.png');
-    game.load.image('check1','../img/check_point.png');
-    game.load.image('btnNuevaPartida','../img/boton_nueva_partida.png');
+    function cargarImagenes(game){
+        //Aca se cargan la imagenes del juego, es decir los sprites
+        game.load.image('fondo_juego','../img/fondo_juego.gif');
+        game.load.image('dude','../img/personaje.png');
+        game.load.image('conteo','../img/simbolo_conteo_estrellas.png')
+        game.load.image('asteroide_derecha_grande','../img/asteroide_derecha_grande.png');
+        game.load.image('asteroide_izquierda_grande','../img/asteroide_izquierda_grande.png');
+        game.load.image('asteroide_derecha_pequeño','../img/asteroide_derecha_pequeño.png');
+        game.load.image('asteroide_izquierda_pequeño','../img/asteroide_izquierda_pequeño.png');
+        game.load.image('msmCheck','../img/frase_check_point.png');
+        game.load.image('opciones_juego','../img/opciones_juego.png');
+        game.load.image('estrella','../img/estrellas_recolectar_juego.png');
+        game.load.image('check1','../img/check_point.png');
+        game.load.image('btnNuevaPartida','../img/boton_nueva_partida.png');
+        
+    }
     
-}
+    function create ()
+    {   
+        //Funcion restart
+        function restartGame(thisGame){
 
-function create ()
-{   
-    //Asignar el fondo del juego
-    this.add.image(180, 320, 'fondo_juego');
+        thisGame.sys.game.destroy(true);
+        startNewGame();
+     }
 
-    //iconos del juego
-    this.add.image(24, 24,'conteo').setOrigin(0);
-    scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
-    btnOpciones = this.add.sprite(308, 24,'opciones_juego').setInteractive();
-    btnOpciones.setOrigin(0);
+     function pauseGame(){
 
-    //Botones acciones
-    btnOpciones.on('pointerdown',function () {
-        asteroids.setVelocity(0,0);
-        cambiarPantalla(pantalla_game, pantalla_opciones);
-    });
+
+     }
+        
+        //Asignar el fondo del juego
+        this.add.image(180, 320, 'fondo_juego');
     
-    //Grupo de asteroides, es decir los obstaculos
-    asteroids = this.physics.add.group();
-    //Grupo de estrellas
-    stars = this.physics.add.group();
-    //Eventos para crear las estrellas y los planetas
-    timedEvent = this.time.addEvent({ delay: 5000, callback: createStar, callbackScope: this, loop: true });
-    timedEvent = this.time.addEvent({ delay: 4000, callback: createAsteroids, callbackScope: this, loop: true });
+        //iconos del juego
+        this.add.image(24, 24,'conteo').setOrigin(0);
+        scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
+        btnOpciones = this.add.sprite(308, 24,'opciones_juego').setInteractive();
+        btnOpciones.setOrigin(0);
     
-    //Personaje
-    sprite = this.add.image(180, 560, 'dude');
-
-    //Fisica del video juego
-    this.physics.world.enable(sprite);
-    sprite.body.setCollideWorldBounds(true);
-    sprite.setInteractive({ draggable: true });
-    this.physics.add.collider(sprite, asteroids);
-    this.physics.add.collider(asteroids,asteroids);
+        //Botones acciones
+        btnOpciones.on('pointerdown',function () {
+            asteroids.setVelocity(0,0);
+            cambiarPantalla(pantalla_game, pantalla_opciones);
+        });
+        
+        //Grupo de asteroides, es decir los obstaculos
+        asteroids = this.physics.add.group();
+        //Grupo de estrellas
+        stars = this.physics.add.group();
+        //Eventos para crear las estrellas y los planetas
+        timedEvent = this.time.addEvent({ delay: 5000, callback: createStar, callbackScope: this, loop: true });
+        timedEvent = this.time.addEvent({ delay: 4000, callback: createAsteroids, callbackScope: this, loop: true });
+        
+        //Personaje
+        sprite = this.add.image(180, 560, 'dude');
     
-    //Recolector de estrellas
-    this.physics.add.overlap(sprite, stars, collectStar, null, this);
-    this.physics.add.overlap(sprite, checkp1, check, null, this);
+        //Fisica del video juego
+        this.physics.world.enable(sprite);
+        sprite.body.setCollideWorldBounds(true);
+        sprite.setInteractive({ draggable: true });
+        this.physics.add.collider(sprite, asteroids);
+        this.physics.add.collider(asteroids,asteroids);
+        
+        //Recolector de estrellas
+        this.physics.add.overlap(sprite, stars, collectStar, null, this);
+        this.physics.add.overlap(sprite, checkp1, check, null, this);
+    
+        //Detectar la colision entre Baldur y los asteroides
+        this.physics.add.overlap(sprite, asteroids, choque, null, this);   
 
-    //Detectar la colision entre Baldur y los asteroides
-    this.physics.add.overlap(sprite, asteroids, choque, null, this);   
- 
-}
 
-function update ()
-{
+        //Llamar funcion
+        // bandera=1;
+        // if (bandera!=0) {
+        //    restartGame(this);
+        // }
+     
+    }
+    
+    function update ()
+    {
+        
+        sprite.on('drag', function (pointer, dragX, dragY) {
+            this.x = dragX;
+        });
+    }
 
-    sprite.on('drag', function (pointer, dragX, dragY) {
-        this.x = dragX;
-    });
-}
 
 //Funcion para crear estrellas cada cierto tiempo
 function createStar() {
@@ -200,7 +227,7 @@ function choque(){
 
     isChoque = true;
     bntRestart = this.add.sprite(130,300,'btnNuevaPartida').setInteractive();
-    game.state.start(game.state.current);
+    //game.state.start(game.state.current);
     bntRestart.setOrigin(0);
     bntRestart.setScale(1.5);
     asteroids.setVelocity(0,0);
@@ -307,3 +334,6 @@ function asignarEventoMapa(){
 function randomNum(max,min){
     return Math.floor(Math.random() * ((max+1) - min) + min);
 }
+
+}
+
