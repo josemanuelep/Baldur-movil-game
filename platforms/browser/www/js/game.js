@@ -10,6 +10,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
+            debug: true,
             gravity: { y: 0 }
         }
     },
@@ -29,6 +30,10 @@ var score = 0;
 var btnOpciones;
 var asteroids;
 var stars;
+var timedEvent;
+var isChoque =  false;
+var counAsteroids = 0;
+
 
 function preload ()
 {   
@@ -53,17 +58,8 @@ function cargarImagenes(game){
     
 }
 
-function esPar(numero) {
-    if(numero % 2 == 0) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
 function create ()
-{
+{   
     //Asignar el fondo del juego
     this.add.image(180, 320, 'fondo_juego');
 
@@ -72,10 +68,10 @@ function create ()
     scoreText = this.add.text(60, 30, '0',{fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5',fontSize: '15px'});
     btnOpciones = this.add.sprite(308, 24,'opciones_juego').setInteractive();
     btnOpciones.setOrigin(0);
-    
+
+    //Botones
     btnOpciones.on('pointerdown',function () {
         asteroids.setVelocity(0,0);
-        stars.setVelocity(0,0);
         cambiarPantalla(pantalla_game, pantalla_opciones);
     });
     
@@ -83,45 +79,10 @@ function create ()
     asteroids = this.physics.add.group();
     //Grupo de estrellas
     stars = this.physics.add.group();
-    //Checks points
-    checkp1 = this.physics.add.group();
+    //Eventos para crear las estrellas y los planetas
+    timedEvent = this.time.addEvent({ delay: 5000, callback: createStar, callbackScope: this, loop: true });
+    timedEvent = this.time.addEvent({ delay: 4000, callback: createAsteroids, callbackScope: this, loop: true });
     
-
-    //Estrellas 
-    for (let i = 0; i < 40; i++) {
-
-        var star = stars.create(randomNum(30,330), randomNum(0,-9000),"estrella");
-        
-        //Definir el tamaño de las estrellas
-        if (esPar(i)) {
-
-            star.setScale(1.8);
-
-            
-        } else {
-
-            star.setScale(1);
-            
-        }
-    }
-
-    //Cilos for para crear los obstaculos
-    for (let i = 0; i < 6; i++) {
-        asteroids.create(25, (i*(-1400)),"asteroide_izquierda_grande").body.setCircle(110);
-    }
-    for (let i = 0; i < 6; i++) {
-        asteroids.create(randomNum(100,200), (i*(-1400))-350,"asteroide_derecha_pequeño").body.setCircle(80);
-    }
-    for (let i = 0; i < 6; i++) {
-        asteroids.create(randomNum(160,260), (i*(-1400))-700,"asteroide_izquierda_pequeño").body.setCircle(80);
-    }
-    for (let i = 0; i < 6; i++) {
-        asteroids.create(335, (i*(-1400))-1050,"asteroide_derecha_grande").body.setCircle(110);
-    }
-
-    asteroids.setVelocity(0,200);
-    stars.setVelocity(0,100);
-
     //Personaje
     sprite = this.add.image(180, 560, 'dude');
 
@@ -130,18 +91,112 @@ function create ()
     sprite.body.setCollideWorldBounds(true);
     sprite.setInteractive({ draggable: true });
     this.physics.add.collider(sprite, asteroids);
+    this.physics.add.collider(asteroids,asteroids);
+    
     //Recolector de estrellas
     this.physics.add.overlap(sprite, stars, collectStar, null, this);
+    this.physics.add.overlap(sprite, checkp1, check, null, this);
+
+    //Detectar la colision entre Baldur y los asteroides
+    this.physics.add.overlap(sprite, asteroids, choque, null, this);
    
  
 }
 
 function update ()
 {
-    
+
     sprite.on('drag', function (pointer, dragX, dragY) {
         this.x = dragX;
     });
+}
+
+//Funcion para crear estrellas cada cierto tiempo
+function createStar() {
+
+    var rdn = Math.floor(Math.random()*4)+1;
+    var otherStar;
+
+    if (isChoque==false) {
+
+        switch (rdn) {
+
+            case 1:
+                otherStar = stars.create(randomNum(20,300), 0,'estrella');
+                otherStar.setScale(1);
+                otherStar.setVelocity(0,50);
+                break;
+            case 2:
+                otherStar = stars.create(randomNum(20,300), 0,'estrella');
+                otherStar.setScale(1.3);
+                otherStar.setVelocity(0,50);
+                break; 
+            case 3:
+                otherStar = stars.create(randomNum(20,300), 0,'estrella');
+                otherStar.setScale(1.6);
+                otherStar.setVelocity(0,50);
+                break;     
+            case 4:
+                otherStar = stars.create(randomNum(20,300), 0,'estrella');
+                otherStar.setScale(1.9);
+                otherStar.setVelocity(0,50);
+                break;   
+        
+            default:
+                break;
+        }
+       
+    }
+
+}
+
+//Funcion para crear asteroides cada cierto tiempo
+function createAsteroids() {
+
+    var rdn = Math.floor(Math.random()*4)+1;
+    var otherAsteroid;
+
+    if (isChoque==false) {
+
+        switch (rdn) {
+
+            case 1:
+                otherAsteroid = asteroids.create(25, -100,"asteroide_izquierda_grande").body.setCircle(100);
+                otherAsteroid.setVelocity(0,80);
+                counAsteroids++;
+                break;
+            case 2:
+                otherAsteroid = asteroids.create(randomNum(100,200), -140,"asteroide_derecha_pequeño").body.setCircle(80);
+                otherAsteroid.setVelocity(0,90);
+                counAsteroids++;
+                break; 
+            case 3:
+                otherAsteroid = asteroids.create(randomNum(160,260), -200,"asteroide_izquierda_pequeño").body.setCircle(80);
+                otherAsteroid.setVelocity(0,100);
+                counAsteroids++;
+                break;     
+            case 4:
+                otherAsteroid = asteroids.create(335, -220,"asteroide_derecha_grande").body.setCircle(100);
+                otherAsteroid.setVelocity(0,110);
+                counAsteroids++;
+                break;   
+        
+            default:
+                break;
+        }
+       
+    }
+
+}
+
+//Funcion para captuar el choque de los asteroides
+function choque(){
+
+    isChoque = true;
+    asteroids.setVelocity(0,0);
+    stars.setVelocity(0,0);
+
+
 }
 
 function check(player, checkp1)
@@ -155,19 +210,22 @@ function collectStar (player, star)
     star.disableBody(true, true);
 
     //  Add and update the score
-    score += 10;
+    score += 20;
     scoreText.setText('Score: ' + score);
 
     //llegada al checkpoint
-    if (score==40) {
+    if (score==40||counAsteroids>2) {
 
-        checkp1.create(160,350,"check1");
-        this.physics.add.overlap(sprite, checkp1, check, null, this);
-        checkp1.setVelocity(0,120);
-        asteroids.setVelocity(0);
-        stars.setVelocity(0);
-        
-        
+        //Checks points
+        checkp1 = this.physics.add.group();
+        isChoque = true;
+        var ch = checkp1.create(160,350,"check1");
+        ch.body.setCollideWorldBounds(true);
+        ch.setVelocity(0,120);
+
+        //Detener las estrellas
+        asteroids.setVelocity(0,0);
+        stars.setVelocity(0,0);
         
     }
 }
@@ -179,6 +237,7 @@ function asignarEventos(){
 }
 
 function cargarBotones(){
+
     btnContinuar = document.getElementById("btnContinuar");
     btnOpciones = document.getElementsByClassName("btnOpciones");
     btnMusica = document.getElementById("btnMusica");
