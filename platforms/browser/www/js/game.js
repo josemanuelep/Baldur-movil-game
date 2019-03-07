@@ -1,6 +1,7 @@
 var gameOver = false;
 var checkpoints = [false, false, false];
-var btnContinuar, btnOpciones, opcion_menu, opcion_personajes, opcion_musica, opcion_creditos, btn_volver, btn_mapa ;
+var btnContinuar, btnOpciones, opcion_menu, opcion_personajes, opcion_musica, 
+opcion_creditos, btn_volver, btn_mapa, btnVolverInicio, btnNuevaPartida, resultado_juego ;
 
 var config = {
     type: Phaser.AUTO,
@@ -22,16 +23,19 @@ var config = {
 };
     
 
-var game = new Phaser.Game(config);
+var game;
 var sprite;
 var scoreText;
+
+cargarBotones();
+asignarEventos();
+cambiarPantalla(pantalla_carga, pantalla_inicio);
 
 function preload ()
 {   
     cargarImagenes(this);
-    cargarBotones();
-    asignarEventos();
-    //cambiarPantalla(pantalla_carga, pantalla_inicio);
+    this.load.audio('theme','../Twisting.mp3');
+    asignarEventosModalBox(this);
 }
 
 function cargarImagenes(game){
@@ -48,7 +52,9 @@ function cargarImagenes(game){
 
 function create ()
 {
-    
+    var music = this.sound.add('theme');
+
+    music.play();
     this.add.image(180, 320, 'fondo_juego');
 
     
@@ -93,6 +99,7 @@ function asignarEventos(){
     asignarEventosInicio();
     asignarEventosOpciones();
     asignarEventoMapa();
+    //asignarEventosModalBox();
 }
 
 function cargarBotones(){
@@ -105,6 +112,9 @@ function cargarBotones(){
     opcion_creditos = document.getElementById("opcion_creditos");
     btn_volver = document.getElementById("boton_volver");
     btn_mapa = document.getElementById("boton_mapa");
+    btnVolverInicio = document.getElementById("btnVolverInicio");
+    btnNuevaPartida = document.getElementById("btnNuevaPartida");
+    resultado_juego = document.getElementById("resultado_juego");
 }
 
 function cambiarPantalla(origen, destino){
@@ -148,7 +158,23 @@ function asignarEventosOpciones(){
 function asignarEventoMapa(){
     btn_mapa.addEventListener("click", function(){
         cambiarPantalla(pantalla_mapa, pantalla_game);
+        game = new Phaser.Game(config);
     });
+}
+
+function asignarEventosModalBox(game){
+    btnVolverInicio.addEventListener("click", function(){
+        cambiarPantalla(pantalla_game, pantalla_inicio);
+        resultado_juego.className = "oculto";
+        game.sys.game.destroy(true);
+
+    });
+    btnNuevaPartida.addEventListener("click", function(){
+        resultado_juego.className = "oculto";
+        game.sys.game.destroy(true);
+        game = new Phaser.Game(config);
+    });
+
 }
 
 function randomNum(max,min){

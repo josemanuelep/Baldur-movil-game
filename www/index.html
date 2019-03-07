@@ -43,8 +43,31 @@
 
             </div>
 
-            <div id="pantalla_game" class="pantalla">
-
+            <div id="pantalla_game" class="pantalla oculto">
+                <div id="resultado_juego" class="modal_box oculto">
+                        <div id="contenedor_ganaste" class="contenedor_resultado oculto">
+                            <h1 id="txt_ganaste">GANASTE</h1>
+                        </div>
+                        <div id="contenedor_perdiste" class="contenedor_resultado oculto">
+                            <h1 id="txt_ganaste">PERDISTE</h1>
+                        </div>
+                        <div class="contenedor_info">
+                            <div class="card" id="consejos">
+                                <h2>LOS SECRETOS DE BALDUR <br>
+                                Algunos secretos para empezar a jugar</h2>
+                                <p>
+                                    -Mueve el dedo por la pantalla para deslizarte <br>
+                                    -Evita los encuentros indeseados <br>
+                                    -Obten una recompensa al recolectar muchas estrellas <br>
+                                    -Nuevos mundos y nuevos desafios
+                                </p>
+                            </div>
+                            <div class="card oculto" id="estadisticas"></div>
+                            <div class="card oculto" id="valorar"></div>
+                        </div>
+                        <img src="img/boton_volver_inicio.png" alt="" id="btnVolverInicio">
+                        <img src="img/boton_nueva_partida.png" alt="" id="btnNuevaPartida">
+                </div>
             </div>
         </div>
         <script type="text/javascript" src="js/phaser.min.js"></script>
