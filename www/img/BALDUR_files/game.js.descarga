@@ -47,7 +47,6 @@ function startNewGame(){
     var counAsteroids = 0;
     var currentCheckPoint=0;
     var banderaPausa=false;
-    var collectedStars= 0;
    
     
 function preload ()
@@ -124,8 +123,8 @@ function create ()
         //Grupo de estrellas
         stars = this.physics.add.group();
         //Eventos para crear las estrellas y los planetas
-        timedEvent = this.time.addEvent({ delay: 5000, callback: createStar, callbackScope: this, loop: true });
-        timedEvent = this.time.addEvent({ delay: 4000, callback: createAsteroids, callbackScope: this, loop: true });
+        //timedEvent = this.time.addEvent({ delay: 5000, callback: createStar, callbackScope: this, loop: true });
+        //timedEvent = this.time.addEvent({ delay: 4000, callback: createAsteroids, callbackScope: this, loop: true });
         timedEvent = this.time.addEvent({ delay: 6000, callback: checksPoints, callbackScope: this, loop: true });
         
         //Personaje
@@ -299,7 +298,6 @@ function createStar() {
     saveGameData();
     resultado_juego.className = "modal_box animated fadeIn slower";
     contenedor_perdiste.className = "contenedor_resultado";
-    secretosBaldur.className = "contenedor_info";
     prueba.className = "";
     regresaInicio.className = "";
  }

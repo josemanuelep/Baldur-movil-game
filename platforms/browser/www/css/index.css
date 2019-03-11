@@ -38,7 +38,7 @@ body {
     height: 640px;
     position: relative;
     background-color: #2e2e2e;
-    display: block;
+    /**display: block;**/
 }
 
 .oculto{
@@ -47,6 +47,14 @@ body {
 
 img{
     position: absolute;
+}
+
+#prueba{
+
+position: absolute;
+left: 270px;
+top:560px;
+
 }
 
 #logo{
@@ -182,9 +190,91 @@ h3{
     left:137px;
 }
 
+.modal_box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor_resultado{
+    background-color: rgba(236, 222, 181, 0.8);
+    width: 100%;
+    height: 120px;
+    position: absolute;
+    top: 78px;
+}
+
+.contenedor_info{
+    background-color: rgba(75, 158, 131, 0.9);
+    width: 100%;
+    height: 180px;
+    position: absolute;
+    top: 230px;
+}
+
+#txt_ganaste{
+    margin: 15px 0;
+    position: absolute;
+    color: rgb(32, 41, 54);
+    font-size: 50pt;
+    width: 100%;
+    text-align: center;
+}
+
+.card{
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 70%;
+    height: 80%;
+    background-color: rgba(77, 73, 73, 0.2);
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.card h2{
+    font-size: 11pt;
+    margin: 5px 0px;
+}
+
+.card p{
+    font-family: 'Akrobat';
+    font-weight: 100;
+    color: #ecdeb5;
+    font-size: 10pt;
+    margin: 7px 0px;
+}
+
+
 #pantalla_mapa .btnOpciones{
     left: 147.5px;
 }
+
+#regresaInicio{
+
+    left: 15px;
+    bottom: 15px;
+    position: absolute;
+    
+}
+
+.btnIzq{
+
+    display: inline;
+    position: absolute;
+    left: -30px;
+    top: 50px;
+    
+}
+
+.btnDer{
+
+    display: inline;
+    position: absolute;
+    left: 260px;
+    top: 50px;
+}
+
 
 @font-face {
     font-family: 'Akrobat';

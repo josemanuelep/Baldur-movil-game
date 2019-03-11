@@ -44,9 +44,57 @@
             </div>
 
             <div id="pantalla_game" class="pantalla">
-
+                    <div id="resultado_juego" class="modal_box oculto">
+                            <div id="contenedor_ganaste" class="contenedor_resultado oculto">
+                                <h1 id="txt_ganaste">GANASTE</h1>
+                            </div>
+                            <div id="contenedor_perdiste" class="contenedor_resultado oculto">
+                                <h1 id="txt_ganaste">PERDISTE</h1>
+                            </div>
+                            <div id="secretosBaldur" class="contenedor_info oculto">
+                                <div class="card" id="consejos">
+                                    <h2>LOS SECRETOS DE BALDUR <br>
+                                    Algunos secretos para empezar a jugar</h2>
+                                    
+                                    <p>
+                                        -Mueve el dedo por la pantalla para deslizarte <br>
+                                        -Evita los encuentros indeseados <br>
+                                        -Obten una recompensa al recolectar muchas estrellas <br>
+                                        -Nuevos mundos y nuevos desafios
+                                    </p>
+                                    <input class="btnDer" id="moverDerEstadistica" type="image"  src="img/flecha_mover_derecha.png">
+                                </div>
+                            </div>
+                            <div id="estadisticasBaldur" class="contenedor_info oculto">
+                                <div class="card" id="consejos">
+                                    <input class="btnIzq" id="moverIzqSecretos" type="image"  src="img/flecha_mover_izquierda.png">
+                                    <h2>Estadísticas<br>
+                                    Los Resultados De Tu Partida</h2>
+                                    <p>
+                                        Progreso: <strong id="progresoPartida"></strong> <br>
+                                        Fracasos: <strong id="fracasosPartida"></strong> <br>
+                                        Estrellas: <strong id="estrellasPartida"></strong><br>
+                                        CheckPoints: <strong id="checkPointsPartida"></strong>
+                                    </p>
+                                    <input class="btnDer" id="moverDerValoranos" type="image"  src="img/flecha_mover_derecha.png">
+                                </div>
+                            </div>
+                            <div id="valorarBaldur" class="contenedor_info oculto">
+                                <div class="card" id="consejos">
+                                    <input class="btnIzq" id="moverIzqEstadistica" type="image"  src="img/flecha_mover_izquierda.png">
+                                    <h2>Valoranos</h2>
+                                    <p>
+                                       Si te gusta nuestro juego,<br> 
+                                       valoralo para apoyarlo
+                                    </p>
+                                    <input id="btnValorar" class="" type="image"  src="img/boton_valorar.png">
+                                </div>
+                            </div>
+                            <input id="prueba" class="oculto" type="image"  src="img/boton_nueva_partida.png">
+                            <input id="regresaInicio" class="oculto" type="image" src="img/boton_volver.png">
+                    </div>
+                </div>
             </div>
-        </div>
         <script type="text/javascript" src="js/phaser.min.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
