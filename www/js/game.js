@@ -145,8 +145,8 @@ function startNewGame(){
     }
 
 
-//Funcion para crear estrellas cada cierto tiempo
-function createStar() {
+    //Funcion para crear estrellas cada cierto tiempo
+    function createStar() {
 
     var rdn = Math.floor(Math.random()*4)+1;
     var otherStar;
@@ -184,8 +184,8 @@ function createStar() {
 
 }
 
-//Funcion para crear asteroides cada cierto tiempo
-function createAsteroids() {
+ //Funcion para crear asteroides cada cierto tiempo
+ function createAsteroids() {
 
     var rdn = Math.floor(Math.random()*4)+1;
     var otherAsteroid;
