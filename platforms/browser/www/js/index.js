@@ -32,12 +32,14 @@ var app = {
 var gameOver = false;
 var checkpoints = [false, false, false,false];
 var progress = 0;
-var fails = localStorage.getItem("fails");
-var starsp =localStorage.getItem("estrellas");
-var checkPonitString = localStorage.getItem("check");
+var fails = 0;
+var starsp = 0 ;
+var checkPonitString = '0/4' ;
 var game;
 var pause = true;
 var sprite;
+var music;
+var musicIsOn = false;
 
 function startNewGame(){
     var btnContinuar, btnOpciones, opcion_menu, opcion_personajes, opcion_musica, opcion_creditos, btn_volver, btn_mapa ,btnRestart;
@@ -102,20 +104,30 @@ function cargarImagenes(game){
     
 function create ()
     {   
-
+        //Variables del localStorage - inicializacion
+        progress = localStorage.getItem("progress");
+        fails = localStorage.getItem("fails");
+        starsp = localStorage.getItem("estrellas");
+        checkPonitString =  localStorage.getItem("check");
         //Musica
-        var music = this.sound.add('theme');
+        music = this.sound.add('theme');
         music.play();
+        musicIsOn = true;
         //Eventos de los botones para navegar e los modals box
         moverDerEstadistica.addEventListener("click", function() {
             let screen1 = document.getElementById("secretosBaldur");
             let screen2 = document.getElementById("estadisticasBaldur");
             cambiarModalBox(screen1,screen2);
+            document.getElementById("progresoPartida").innerHTML = progress + '%';
+            document.getElementById("fracasosPartida").innerHTML = fails;
+            document.getElementById("estrellasPartida").innerHTML = collectedStars;
+            document.getElementById("checkPointsPartida").innerHTML = checkPonitString;
           });
         moverIzqSecretos.addEventListener("click", function() {
             let screen1 = document.getElementById("estadisticasBaldur");
             let screen2 = document.getElementById("secretosBaldur");
             cambiarModalBox(screen1,screen2);
+            
           });
         moverDerValoranos.addEventListener("click", function() {
             let screen1 = document.getElementById("estadisticasBaldur");
@@ -257,7 +269,7 @@ function createStar() {
             default:
                 break;
         }
-       stars.setVelocity(0,40);
+       stars.setVelocity(0,60);
     }
 
  }
@@ -311,9 +323,11 @@ function createStar() {
     secretosBaldur.className = "contenedor_info";
     prueba.className = "";
     regresaInicio.className = "";
-    console.log('Estrellas : '+localStorage.getItem("estrellas"));
-    console.log('fallos : '+fails);
-    console.log('Chechkpoint : '+checkPonitString);
+    //Variables del localStorage - inicializacion
+    progress = localStorage.getItem("progress");
+    fails = localStorage.getItem("fails");
+    starsp = localStorage.getItem("estrellas");
+    checkPonitString =  localStorage.getItem("check");
  }
 
  //Funcion para verificar los checks points
@@ -496,7 +510,22 @@ function checksPoints(){
         });
       });
     btnMusica.addEventListener("click", function(){
-        console.log("Apagar Musica");
+        
+        switch (musicIsOn) {
+            case true:
+                console.log("Apagar Musica");
+                music.pause();
+                musicIsOn = false;
+                break;
+            case false:
+                console.log("Encender Musica");
+                music.play();
+                musicIsOn = true;
+                break;
+            default:
+                break;
+        }
+              
     });
  }
 
@@ -509,6 +538,7 @@ function checksPoints(){
         
     });
     opcion_musica.addEventListener("click", function(){
+        
         
     });
     opcion_creditos.addEventListener("click", function(){
@@ -534,7 +564,5 @@ function checksPoints(){
 
 
 }
-
-
 app.initialize();
 

@@ -183,6 +183,9 @@ function saveGameData(){
             let ch = '4/4';
             localStorage.setItem("check", ch);
         }
+    console.log('Estrellas : '+localStorage.getItem("estrellas"));
+    console.log('fallos : '+fails);
+    console.log('Chechkpoint : '+checkPonitString);
 
     }
 
@@ -289,9 +292,7 @@ function createStar() {
     secretosBaldur.className = "contenedor_info";
     prueba.className = "";
     regresaInicio.className = "";
-    console.log('Estrellas : '+localStorage.getItem("estrellas"));
-    console.log('fallos : '+fails);
-    console.log('Chechkpoint : '+checkPonitString);
+    
  }
 
  //Funcion para verificar los checks points

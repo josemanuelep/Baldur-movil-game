@@ -156,10 +156,10 @@ function update (){
 
     }
 
-function saveGameData(){
+function saveGameData(fallos){
 
         /*Guardando los datos en el LocalStorage*/
-        localStorage.setItem("fails", fails);
+        localStorage.setItem("fails", fallos);
         localStorage.setItem("progress", progress);
         localStorage.setItem("estrellas", collectedStars);
         
@@ -183,6 +183,9 @@ function saveGameData(){
             let ch = '4/4';
             localStorage.setItem("check", ch);
         }
+    console.log('Estrellas : '+localStorage.getItem("estrellas"));
+    console.log('fallos : '+fails);
+    console.log('Chechkpoint : '+checkPonitString);
 
     }
 
@@ -283,15 +286,13 @@ function createStar() {
     stars.setVelocity(0,0);
     fails++;
     isChoque = true;
-    saveGameData();
+    saveGameData(fails);
     resultado_juego.className = "modal_box animated fadeIn slower";
     contenedor_perdiste.className = "contenedor_resultado";
     secretosBaldur.className = "contenedor_info";
     prueba.className = "";
     regresaInicio.className = "";
-    console.log('Estrellas : '+localStorage.getItem("estrellas"));
-    console.log('fallos : '+fails);
-    console.log('Chechkpoint : '+checkPonitString);
+    
  }
 
  //Funcion para verificar los checks points
