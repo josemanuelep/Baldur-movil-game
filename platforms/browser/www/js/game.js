@@ -156,10 +156,10 @@ function update (){
 
     }
 
-function saveGameData(fallos){
+function saveGameData(){
 
         /*Guardando los datos en el LocalStorage*/
-        localStorage.setItem("fails", fallos);
+        localStorage.setItem("fails", fails);
         localStorage.setItem("progress", progress);
         localStorage.setItem("estrellas", collectedStars);
         
@@ -286,7 +286,7 @@ function createStar() {
     stars.setVelocity(0,0);
     fails++;
     isChoque = true;
-    saveGameData(fails);
+    saveGameData();
     resultado_juego.className = "modal_box animated fadeIn slower";
     contenedor_perdiste.className = "contenedor_resultado";
     secretosBaldur.className = "contenedor_info";

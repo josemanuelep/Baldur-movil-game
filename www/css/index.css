@@ -176,7 +176,34 @@ h3{
     text-align: center;
     top: 66px;
 }
-
+.tituloCreditos{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 170px;
+}
+.parrafoCreditos{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 215px;
+}
+.tituloCreditos2{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 250px;
+}
+.parrafoCreditos2{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 280px;
+}
 #mensaje_nivel{
     position: absolute;
     width: 100%;
@@ -273,6 +300,13 @@ h3{
     position: absolute;
     left: 260px;
     top: 50px;
+}
+
+#imgCreditos{
+
+    position: relative;
+    left: 35px;
+    top: 100px;
 }
 
 
