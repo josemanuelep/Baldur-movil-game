@@ -1,4 +1,4 @@
-startNewGame();
+//startNewGame();
 //obtener Variables del localStorage
 var gameOver = false;
 var checkpoints = [false, false, false,false];
