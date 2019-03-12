@@ -4,13 +4,9 @@ var gameOver = false;
 var checkpoints = [false, false, false,false];
 var progress = 0;
 var fails = localStorage.getItem("fails");
-var starsp =localStorage.getItem("estrellas");;
+var starsp =localStorage.getItem("estrellas");
 var checkPonitString = localStorage.getItem("check");
- /*Mostrar datos almacenados*/      
- document.getElementById("progresoPartida").innerHTML = progress;
- document.getElementById("fracasosPartida").innerHTML = fails;
- document.getElementById("estrellasPartida").innerHTML = starsp;
- document.getElementById("checkPointsPartida").innerHTML = checkPonitString;
+var game;
 
 function startNewGame(){
     var btnContinuar, btnOpciones, opcion_menu, opcion_personajes, opcion_musica, opcion_creditos, btn_volver, btn_mapa ,btnRestart;
@@ -34,7 +30,7 @@ function startNewGame(){
         }
     };
     
-    var game = new Phaser.Game(config);
+    game = new Phaser.Game(config);
     var sprite;
     var scoreText;
     var checkp1;
@@ -54,7 +50,8 @@ function preload ()
     {   
         cargarImagenes(this);
         cargarBotones();
-        asignarEventos();
+        asignarEventos(this);
+        this.load.audio('theme','../Twisting.mp3');
         //cambiarPantalla(pantalla_carga, pantalla_inicio);
     }
 
@@ -78,6 +75,10 @@ function cargarImagenes(game){
     
 function create ()
     {   
+
+        //Musica
+        var music = this.sound.add('theme');
+        music.play();
         //Eventos de los botones para navegar e los modals box
         moverDerEstadistica.addEventListener("click", function() {
             let screen1 = document.getElementById("secretosBaldur");
@@ -98,7 +99,6 @@ function create ()
             let screen1 = document.getElementById("valorarBaldur");
             let screen2 = document.getElementById("estadisticasBaldur");
             cambiarModalBox(screen1,screen2);
-            
           });
         
         //Evento para reiniciar juego
@@ -125,8 +125,8 @@ function create ()
         stars = this.physics.add.group();
         //Eventos para crear las estrellas y los planetas
         timedEvent = this.time.addEvent({ delay: 5000, callback: createStar, callbackScope: this, loop: true });
-        timedEvent = this.time.addEvent({ delay: 4000, callback: createAsteroids, callbackScope: this, loop: true });
-        timedEvent = this.time.addEvent({ delay: 6000, callback: checksPoints, callbackScope: this, loop: true });
+        timedEvent = this.time.addEvent({ delay: 2000, callback: createAsteroids, callbackScope: this, loop: true });
+        //timedEvent = this.time.addEvent({ delay: 6000, callback: checksPoints, callbackScope: this, loop: true });
         
         //Personaje
         sprite = this.add.image(180, 560, 'dude');
@@ -139,7 +139,6 @@ function create ()
 
         //Colsiones
         this.physics.add.collider(sprite, asteroids);
-        this.physics.add.collider(asteroids,asteroids);
         
         //Recolector de estrellas
         this.physics.add.overlap(sprite, stars, collectStar, null, this);
@@ -155,7 +154,6 @@ function update (){
             this.x = dragX;
         });
 
-        
     }
 
 function saveGameData(){
@@ -195,17 +193,10 @@ function restartGame(thisGame){
         score=0;
         currentCheckPoint=0;
         resultado_juego.className = "modal_box animated fadeIn slower oculto";
-        this.scene.restart();
+        thisGame.scene.restart();
         banderaPausa = false;
         
  
-     }
-
-//Funcion pausa
-function pauseGame(thisGame){
-
-        thisGame.scene.pause('default');
-
      }
 
 //Funcion para crear estrellas cada cierto tiempo
@@ -260,22 +251,18 @@ function createStar() {
 
             case 1:
                 otherAsteroid = asteroids.create(25, -100,"asteroide_izquierda_grande").body.setCircle(110);
-                otherAsteroid.setVelocity(0,40);
                 counAsteroids++;
                 break;
             case 2:
                 otherAsteroid = asteroids.create(randomNum(100,200), -140,"asteroide_derecha_pequeño").body.setCircle(80);
-                otherAsteroid.setVelocity(0,60);
                 counAsteroids++;
                 break; 
             case 3:
                 otherAsteroid = asteroids.create(randomNum(160,260), -200,"asteroide_izquierda_pequeño").body.setCircle(80);
-                otherAsteroid.setVelocity(0,70);
                 counAsteroids++;
                 break;     
             case 4:
                 otherAsteroid = asteroids.create(335, -220,"asteroide_derecha_grande").body.setCircle(110);
-                otherAsteroid.setVelocity(0,85);
                 counAsteroids++;
                 break;   
         
@@ -283,6 +270,7 @@ function createStar() {
             
                 break;
         }
+        otherAsteroid.setVelocity(0,40);
        
     }
 
@@ -291,7 +279,6 @@ function createStar() {
  //Funcion para captuar el choque de los asteroides
  function choque(){
 
-    console.log('choque');
     asteroids.setVelocity(0,0);
     stars.setVelocity(0,0);
     fails++;
@@ -302,6 +289,9 @@ function createStar() {
     secretosBaldur.className = "contenedor_info";
     prueba.className = "";
     regresaInicio.className = "";
+    console.log('Estrellas : '+localStorage.getItem("estrellas"));
+    console.log('fallos : '+fails);
+    console.log('Chechkpoint : '+checkPonitString);
  }
 
  //Funcion para verificar los checks points
@@ -435,10 +425,10 @@ function checksPoints(){
    
  }
 
- function asignarEventos(){
+ function asignarEventos(game){
     asignarEventosInicio();
     asignarEventosOpciones();
-    asignarEventoMapa();
+    asignarEventoMapa(game);
  }
 
  function cargarBotones(){
@@ -469,9 +459,9 @@ function checksPoints(){
 
     btn_volver.addEventListener("click", function(){
         cambiarPantalla(pantalla_game, pantalla_inicio);
-        resultado_juego.className = "oculto";
-        game.sys.game.destroy(true);
+        
 
+        resultado_juego.className = "oculto";
     });
 
     btnContinuar.addEventListener("click", function(){
@@ -508,10 +498,14 @@ function checksPoints(){
     
  }
 
- function asignarEventoMapa(){
+ function asignarEventoMapa(thisGame){
     btn_mapa.addEventListener("click", function(){
+        thisGame.sys.game.destroy(true);
+        startNewGame();
         cambiarPantalla(pantalla_mapa, pantalla_game);
     });
+    prueba.addEventListener("click",restartGame.bind(this));
+    cambiarPantalla(pantalla_mapa, pantalla_game);
  }
 
  function randomNum(max,min){

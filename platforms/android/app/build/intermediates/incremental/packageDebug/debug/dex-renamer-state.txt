@@ -1,4 +1,4 @@
-#Tue Mar 05 23:31:46 COT 2019
+#Mon Mar 11 22:00:57 COT 2019
 base.0=D\:\\UPB Jose Manuel\\7mo Semestre\\Apps moviles\\Baldur\\baldur\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
