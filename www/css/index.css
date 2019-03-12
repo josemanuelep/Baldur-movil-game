@@ -231,6 +231,8 @@ h3{
     top: 78px;
 }
 
+
+
 .contenedor_info{
     background-color: rgba(75, 158, 131, 0.9);
     width: 100%;
@@ -309,6 +311,41 @@ h3{
     top: 100px;
 }
 
+#boton_volverPersonaje{
+
+    top: 550px;
+    left: 156px;
+
+}
+#estrellas{
+
+    top: 8px;
+    left: -130px;
+}
+#boton_seleccionar{
+
+    top: 436px;
+    left: 138px;
+}
+
+#rostro1{
+    top: 196px;
+    left: 132px;
+}
+
+#boton_volverMapa {
+    top: 468px;
+    left: 156px;
+}
+#boton_volverOpciones {
+    top: 468px;
+    left: 156px;
+}
+#simbolo_conteo_estrellas{
+
+    top: 20px;
+    left: 10px;
+}
 
 @font-face {
     font-family: 'Akrobat';

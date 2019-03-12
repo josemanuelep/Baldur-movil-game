@@ -63,7 +63,6 @@ function startNewGame(){
         physics: {
             default: 'arcade',
             arcade: {
-               debug: true,
                 gravity: { y: 0 }
             }
         },
@@ -103,7 +102,7 @@ function cargarImagenes(game){
     }
     
 function create ()
-    {   
+    {  
         //Variables del localStorage - inicializacion
         progress = localStorage.getItem("progress");
         fails = localStorage.getItem("fails");
@@ -139,9 +138,7 @@ function create ()
             let screen2 = document.getElementById("estadisticasBaldur");
             cambiarModalBox(screen1,screen2);
           });
-        
-        //Evento para reiniciar juego
-        prueba.addEventListener("click",restartGame.bind(this));
+    
 
         //Asignar el fondo del juego
         this.add.image(180, 320, 'fondo_juego');
@@ -225,19 +222,6 @@ function saveGameData(){
 
     }
 
-//Funcion restart
-function restartGame(thisGame){
-
-        isChoque = false;
-        score=0;
-        currentCheckPoint=0;
-        resultado_juego.className = "modal_box animated fadeIn slower oculto";
-        thisGame.scene.restart();
-        pause = false;
-        
- 
-     }
-
 //Funcion para crear estrellas cada cierto tiempo
 function createStar() {
 
@@ -286,19 +270,19 @@ function createStar() {
         switch (rdn) {
 
             case 1:
-                otherAsteroid = asteroids.create(25, -100,"asteroide_izquierda_grande").body.setCircle(110);
+                otherAsteroid = asteroids.create(25, -200,"asteroide_izquierda_grande").body.setCircle(110);
                 counAsteroids++;
                 break;
             case 2:
-                otherAsteroid = asteroids.create(randomNum(100,200), -140,"asteroide_derecha_pequeño").body.setCircle(80);
+                otherAsteroid = asteroids.create(randomNum(100,200), -280,"asteroide_derecha_pequeño").body.setCircle(80);
                 counAsteroids++;
                 break; 
             case 3:
-                otherAsteroid = asteroids.create(randomNum(160,260), -200,"asteroide_izquierda_pequeño").body.setCircle(80);
+                otherAsteroid = asteroids.create(randomNum(160,260), -330,"asteroide_izquierda_pequeño").body.setCircle(80);
                 counAsteroids++;
                 break;     
             case 4:
-                otherAsteroid = asteroids.create(335, -220,"asteroide_derecha_grande").body.setCircle(110);
+                otherAsteroid = asteroids.create(335, -380,"asteroide_derecha_grande").body.setCircle(110);
                 counAsteroids++;
                 break;   
         
@@ -500,6 +484,13 @@ function checksPoints(){
         startNewGame();
     });
 
+    btnRestart.addEventListener("click", function(){
+        cambiarPantalla(pantalla_game, pantalla_game);
+        resultado_juego.className = "oculto";
+        thisGame.sys.game.destroy(true);
+        startNewGame();
+    });
+
     btnContinuar.addEventListener("click", function(){
         cambiarPantalla(pantalla_inicio, pantalla_mapa);
     });
@@ -509,9 +500,14 @@ function checksPoints(){
             cambiarPantalla(element.parentElement, pantalla_opciones);
         });
       });
-    btnMusica.addEventListener("click", function(){
+    btnMusica.addEventListener("click", ApagarMusica);
         
-        switch (musicIsOn) {
+      
+ }
+
+ function ApagarMusica(){
+
+      switch (musicIsOn) {
             case true:
                 console.log("Apagar Musica");
                 music.pause();
@@ -525,8 +521,7 @@ function checksPoints(){
             default:
                 break;
         }
-              
-    });
+
  }
 
  function asignarEventosOpciones(){
@@ -537,15 +532,24 @@ function checksPoints(){
     opcion_personajes.addEventListener("click", function(){
         
     });
-    opcion_musica.addEventListener("click", function(){
-        
-        
-    });
+
+    opcion_musica.addEventListener("click", ApagarMusica);
+
     opcion_creditos.addEventListener("click", function(){
-        
+        cambiarPantalla(pantalla_opciones, pantalla_creditos);
     });
     btn_volver.addEventListener("click", function(){
         cambiarPantalla(pantalla_opciones, pantalla_inicio);
+    });
+    boton_volverOpciones.addEventListener("click", function(){
+        cambiarPantalla(pantalla_opciones, pantalla_inicio);
+    });
+    boton_volverMapa.addEventListener("click", function(){
+        cambiarPantalla(pantalla_mapa, pantalla_inicio);
+    });
+    boton_volverCreditos.addEventListener("click", function(){
+        cambiarPantalla(pantalla_creditos, pantalla_opciones);
+        console.log('Regresar');
     });
     
  }
@@ -555,7 +559,6 @@ function checksPoints(){
         pause = false;
         cambiarPantalla(pantalla_mapa, pantalla_game);
     });
-    //prueba.addEventListener("click",restartGame.bind(this));
  }
 
  function randomNum(max,min){

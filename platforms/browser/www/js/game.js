@@ -253,19 +253,19 @@ function createStar() {
         switch (rdn) {
 
             case 1:
-                otherAsteroid = asteroids.create(25, -100,"asteroide_izquierda_grande").body.setCircle(110);
+                otherAsteroid = asteroids.create(25, -140,"asteroide_izquierda_grande").body.setCircle(110);
                 counAsteroids++;
                 break;
             case 2:
-                otherAsteroid = asteroids.create(randomNum(100,200), -140,"asteroide_derecha_pequeño").body.setCircle(80);
+                otherAsteroid = asteroids.create(randomNum(100,200), -220,"asteroide_derecha_pequeño").body.setCircle(80);
                 counAsteroids++;
                 break; 
             case 3:
-                otherAsteroid = asteroids.create(randomNum(160,260), -200,"asteroide_izquierda_pequeño").body.setCircle(80);
+                otherAsteroid = asteroids.create(randomNum(160,260), -260,"asteroide_izquierda_pequeño").body.setCircle(80);
                 counAsteroids++;
                 break;     
             case 4:
-                otherAsteroid = asteroids.create(335, -220,"asteroide_derecha_grande").body.setCircle(110);
+                otherAsteroid = asteroids.create(335, -320,"asteroide_derecha_grande").body.setCircle(110);
                 counAsteroids++;
                 break;   
         

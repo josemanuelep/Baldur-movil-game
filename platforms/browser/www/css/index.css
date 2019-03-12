@@ -309,6 +309,15 @@ h3{
     top: 100px;
 }
 
+#boton_volverMapa {
+    top: 468px;
+    left: 156px;
+}
+#boton_volverOpciones {
+    top: 468px;
+    left: 156px;
+}
+
 
 @font-face {
     font-family: 'Akrobat';
