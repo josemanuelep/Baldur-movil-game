@@ -38,6 +38,7 @@ body {
     height: 640px;
     position: relative;
     background-color: #2e2e2e;
+    overflow: hidden;
     /**display: block;**/
 }
 
@@ -342,7 +343,7 @@ h3{
 
     position: relative;
     top: 220px;
-    left: 5px;
+    left: -20px;
 }
 
 #btnDerechaPersonaje{
@@ -354,7 +355,7 @@ h3{
 
 #rostroBloqueo{
     top: 225px;
-    left: 300px;
+    left: 320px;
     position: relative;
 }
 
