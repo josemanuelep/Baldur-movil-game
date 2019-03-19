@@ -10,7 +10,7 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         //this.receivedEvent('deviceready');
-        startNewGame();
+        //startNewGame();
         document.getElementById("pantalla_carga").className = "oculto";
         document.getElementById("pantalla_inicio").className = "pantalla animated fadeIn";
     },
@@ -441,8 +441,6 @@ function checksPoints(){
     score += 10;
     scoreText.setText('Score: ' + score);
     collectedStars++;
-
-   
  }
 
  function asignarEventos(game){

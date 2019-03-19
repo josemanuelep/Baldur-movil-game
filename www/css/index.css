@@ -322,15 +322,54 @@ h3{
     top: 8px;
     left: -130px;
 }
-#boton_seleccionar{
+.btn{
 
     top: 436px;
     left: 138px;
 }
 
+#moverDerEstadistica{
+
+    color: lightseagreen;
+    top: 100px;
+}
+
 #rostro1{
     top: 196px;
     left: 132px;
+}
+#rostroDesbloqueo{
+
+    position: relative;
+    top: 220px;
+    left: 5px;
+}
+
+#btnDerechaPersonaje{
+
+    position: relative;
+    top: 305px;
+    left: -50px;
+}
+
+#rostroBloqueo{
+    top: 225px;
+    left: 300px;
+    position: relative;
+}
+
+#moverDerPersonaje{
+
+    top: 325px;
+    position: relative;
+    left: 250px;
+}
+#moverIzqPersonaje{
+
+    position: relative;
+    top: 325px;
+    left: -50px;
+    
 }
 
 #boton_volverMapa {
