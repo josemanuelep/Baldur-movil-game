@@ -18,7 +18,6 @@
     under the License.
 -->
 <html>
-
 <head>
     <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
@@ -33,12 +32,11 @@
         content="default-src 'self' data: gap: 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content: blob:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport"
-        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <title>Hello World</title>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <title>BALDUR</title>
 </head>
-
 <body>
     <div id="pantalla_carga" class="pantalla oculto">
         <img id="logo" src="img/logo.png" class="img" alt="">
@@ -47,7 +45,6 @@
             ...dios de la paz, la pureza, la <br>
             justicia y <strong>la luz...</strong></h2>
     </div>
-
     <div id="pantalla_inicio" class="pantalla oculto">
         <h1 id="title">BALDUR</h1>
         <h3 id="subtitle">Combate la oscuridad con el poder de las estrellas</h3>
@@ -56,7 +53,6 @@
         <img src="img/musica_on.png" alt="" id="btnMusica" class="btnAbajo btnRight">
         <img src="" alt="" id="btnCreditos">
     </div>
-
     <div id="pantalla_opciones" class="pantalla oculto">
         <h2 id="txt_opciones">OPCIONES</h2>
         <img src="img/opcion_menu.png" alt="" id="opcion_menu" class="opcion_arriba opcion_izquierda">
@@ -65,15 +61,19 @@
         <img src="img/opcion_creditos.png" alt="" id="opcion_creditos" class="opcion_abajo opcion_derecha">
         <img src="img/boton_volver.png" alt="" id="boton_volverOpciones" class="boton_volver">
     </div>
-
     <div id="pantalla_mapa" class="pantalla oculto">
         <h2 id="txt_nivel">SOWELU</h2>
         <h3 id="mensaje_nivel">El sol al final del camino</h3>
         <img src="img/mapa_juego1.png" alt="" id="boton_mapa">
+        <p id="ProgresoMapa">
+                Progreso: <strong id="progresoPartida1"></strong> <br>
+                Fracasos: <strong id="fracasosPartida1"></strong> <br>
+                Estrellas: <strong id="estrellasPartida1"></strong><br>
+                CheckPoints: <strong id="checkPointsPartida1"></strong>
+        </p>
         <img src="img/boton_opciones.png" id="btnOpcionesMapa" class="btnAbajo btnLeft" alt="">
         <img src="img/boton_volver.png" alt="" id="boton_volverMapa" class="btnAbajo btnRight">
     </div>
-
     <div id="pantalla_creditos" class="pantalla oculto">
         <h2 id="txt_nivel">Créditos</h2>
         <div class="txt_creditos">
@@ -82,21 +82,10 @@
             <h3>Programación</h3>
             <p>Daniel F. Preciado Tamayo <br>José Manuel Echeverri Palacio</p>
         </div>
-
         <img src="img/elemento_creditos.png" alt="" id="imgCreditos">
         <img src="img/boton_volver.png" alt="" id="boton_volverCreditos" class="boton_volver">
     </div>
-
-    <div id="pantalla_personaje" class="pantalla oculto">
-        <h2 id="txt_nivel">PERSONAJES</h2>
-        <h3 id="estrellas" class="tituloCreditos">1</h3>
-        <img src="img/rostro_personaje_grande.png" alt="" id="rostro1">
-        <img src="img/simbolo_conteo_estrellas.png" alt="" id="simbolo_conteo_estrellas">
-        <img src="img/boton_seleccionar.png" alt="" id="boton_seleccionar">
-        <img src="img/boton_volver.png" alt="" id="boton_volverPersonaje">
-    </div>
-
-    <div id="pantalla_game" class="pantalla">
+    <div id="pantalla_game" class="pantalla oculto">
         <div id="resultado_juego" class="modal_box oculto">
             <div id="contenedor_ganaste" class="contenedor_resultado oculto">
                 <h1 id="txt_ganaste">GANASTE</h1>
@@ -147,7 +136,25 @@
             <input id="regresaInicio" class="oculto" type="image" src="img/boton_volver.png">
         </div>
     </div>
-
+    <div id="pantalla_personaje" class="pantalla oculto">
+        <div id="pantallaPersonaje1" class="animated fadeIn">
+        <h2 id="txt_nivel">SKINS</h2>
+        <img src="img/rostro_personaje_grande.png" alt="" id="rostro1">
+        <img src="img/simbolo_conteo_estrellas.png" alt="" id="simbolo_conteo_estrellas">
+        <img src="img/boton_seleccionar.png" alt="" id="boton_seleccionar" class="btn">
+        <img src="img/rostro_bloqueo_pequeño.png" alt="" id="rostroBloqueo">
+        <img src="img/boton_volver.png" alt="" id="boton_volverSkins" class="boton_volver">
+        <input class="btnDerechaPersonaje" id="moverDerPersonaje" type="image"  src="img/boton_flecha_siguiente.png">
+        </div>
+        <div id="pantallaPersonaje2" class="oculto">
+            <h2 id="txt_nivel">SKINS</h2>
+            <img src="img/rostro_bloqueo_grande.png" alt="" id="rostro1">
+            <img src="img/simbolo_conteo_estrellas.png" alt="" id="simbolo_conteo_estrellas">
+            <img src="img/boton_desbloquear.png" alt="" id="boton_desbloquear" class="btn">
+            <img src="img/rostro_personaje_pequeño.png" alt="" id="rostroDefault">
+            <input class="btnDerechaPersonaje" id="moverIzqPersonaje" type="image"  src="img/boton_flecha_volver.png">
+            </div>
+    </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/phaser.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
