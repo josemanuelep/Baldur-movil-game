@@ -36,11 +36,9 @@ var app = {
         var collectedStars = 0;
         var stars;
         var fails = 0;
-        var progress;
-        var numStars;
-        var checkPointString;
-
-        var btnVolverOpcionesCache;
+        var progress = '0';
+        var numStars;var btnVolverOpcionesCache;
+        var checkPointString = '0/4';
         var config = {
             type: Phaser.AUTO,
             width: 360,
@@ -104,12 +102,40 @@ var app = {
             btn_izq_secretos = document.getElementById('moverIzqSecretos');
             btn_der_valorar = document.getElementById('moverDerValoranos');
 
+            //Pantalla Skins
+            btn_DerPersonaje = document.getElementById("moverDerPersonaje");
+            btn_IzqPersonaje = document.getElementById("moverIzqPersonaje");
+            btn_Desbloquear = document.getElementById("boton_desbloquear");
+            btn_VolverSkins = document.getElementById("boton_volverSkins");
+            btn_DesbloquearPersonaje = document.getElementById("boton_desbloquear");
+
         }
 
         function asignarEventos(game) {
+
+            //Pantalla Skins
+            btn_VolverSkins.addEventListener("click", function () {
+                cambiarPantalla(pantalla_personaje,pantalla_opciones);
+            });
+
+            btn_DerPersonaje.addEventListener("click", function () {
+                cambiarPantallaSkins(pantallaPersonaje1,pantallaPersonaje2,true);
+            });
+            btn_IzqPersonaje.addEventListener("click", function () {
+                cambiarPantallaSkins(pantallaPersonaje2,pantallaPersonaje1,false);
+            });
+            btn_DesbloquearPersonaje.addEventListener("click", function () {
+                console.log('Comprar');
+            });
+            
             //Pantalla Inicio
             btnContinuar.addEventListener("click", function () {
+                document.getElementById("progresoPartida1").innerHTML = progress + '%';
+                document.getElementById("fracasosPartida1").innerHTML = fails;
+                document.getElementById("estrellasPartida1").innerHTML = collectedStars;
+                document.getElementById("checkPointsPartida1").innerHTML = checkPointString;
                 cambiarPantalla(pantalla_inicio, pantalla_mapa);
+
             });
             btnMusica.addEventListener("click", switchMusic);
             btnOpcionesInicio.addEventListener('click', function () {
@@ -123,7 +149,6 @@ var app = {
                 cambiarPantalla(pantalla_mapa, pantalla_inicio);
             });
             btnOpcionesMapa.addEventListener("click", function () {
-
                 cambiarPantalla(pantalla_mapa, pantalla_opciones);
             });
             btnMapa.addEventListener("click", function () {
@@ -155,6 +180,11 @@ var app = {
                 cambiarPantalla(pantalla_opciones, btnVolverOpcionesCache);
             }.bind(game));
 
+            //Pantalla Personajes
+            btnOpcionPersonajes.addEventListener("click", function () {
+                cambiarPantalla(pantalla_opciones, pantalla_personaje);
+            });
+
             //Pantalla Creditos
             btnVolverCreditos.addEventListener("click", function () {
                 cambiarPantalla(pantalla_creditos, pantalla_opciones);
@@ -180,6 +210,9 @@ var app = {
                 let screen1 = document.getElementById("valorarBaldur");
                 let screen2 = document.getElementById("estadisticasBaldur");
                 changeCard(screen1, screen2);
+            });
+            btn_volver.addEventListener("click", function () {
+                cambiarPantalla(pantalla_game,pantalla_inicio);
             });
 
             //Eventos de las opciones de pantalla de resultado
@@ -413,7 +446,7 @@ var app = {
             /*Guardando los datos en el LocalStorage*/
             localStorage.setItem("fails", fails);
             localStorage.setItem("progress", progress);
-            localStorage.setItem("estrellas", collectedStars);
+            localStorage.setItem("estrellas", progress);
 
             var ch;
             switch (progress) {
@@ -437,6 +470,9 @@ var app = {
                     break;
             }
             localStorage.setItem("check", ch);
+            console.log(fails);
+            console.log(progress);
+            console.log(ch);
         }
 
         function update() {
@@ -464,6 +500,19 @@ var app = {
 function cambiarPantalla(origen, destino) {
     origen.className = "oculto";
     destino.className = "pantalla animated fadeIn slower";
+}
+
+function cambiarPantallaSkins(origen, destino, isDerecha){
+
+    if (isDerecha==true) {
+        origen.className = "oculto";
+        destino.className = "pantalla animated fadeInRight";
+    }
+    else{
+        origen.className = "oculto";
+        destino.className = "pantalla animated fadeInLeft";
+    }
+   
 }
 
 app.initialize();

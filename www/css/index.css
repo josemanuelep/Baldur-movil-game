@@ -38,6 +38,7 @@ body {
     height: 640px;
     position: relative;
     background-color: #2e2e2e;
+    overflow: hidden;
     /**display: block;**/
 }
 
@@ -180,12 +181,31 @@ p{
     left: 106px;
 }
 
+#rostro1{
+    top: 196px;
+    left: 132px;
+}
+#rostroBloqueo{
+    top: 225px;
+    left: 320px;
+    position: relative;
+}
+#simbolo_conteo_estrellas{
+
+    top: 20px;
+    left: 10px;
+}
 #txt_nivel{
     position: absolute;
     font-size: 27px;
     width: 100%;
     text-align: center;
     top: 66px;
+}
+#moverDerPersonaje{
+    top: 325px;
+    position: relative;
+    left: 250px;
 }
 
 /*.tituloCreditos{
@@ -318,8 +338,15 @@ p{
     top: 100px;
 }
 
+#ProgresoMapa{
+    position: relative;
+    top: 450px;
+    text-align: center;
+}
+
 #boton_volverPersonaje{
 
+    display: inline;
     top: 550px;
     left: 156px;
 
@@ -337,6 +364,28 @@ p{
 #rostro1{
     top: 196px;
     left: 132px;
+}
+
+#boton_desbloquear{
+
+    top: 425px;
+    left: 135px;
+}
+
+#rostroDefault{
+
+    position: relative;
+    top: 220px;
+    left: -12px;
+    display: block;
+
+}
+#moverIzqPersonaje{
+
+    top: 325px;
+    left: 8px;
+    position: relative;
+
 }
 
 .boton_volver {
