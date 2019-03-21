@@ -27,7 +27,8 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function () {
-        var musicIsOn;
+        var musicIsOn = false;
+        var musicIsCreated = false;
         var gameOver = false;
         var pause = true;
         var score = 0;
@@ -38,6 +39,8 @@ var app = {
         var progress;
         var numStars;
         var checkPointString;
+
+        var btnVolverOpcionesCache;
         var config = {
             type: Phaser.AUTO,
             width: 360,
@@ -46,7 +49,6 @@ var app = {
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
                     gravity: { y: 0 }
                 }
             },
@@ -57,12 +59,10 @@ var app = {
             }
         };
         function preload() {
-
             cargarImagenes(this);
             cargarBotones();
-            asignarEventos();
+            asignarEventos(this);
             this.load.audio('theme', 'Twisting.mp3');
-            cambiarPantalla(pantalla_carga, pantalla_inicio);
         }
 
         function cargarImagenes(game) {
@@ -71,12 +71,6 @@ var app = {
             game.load.image('icono_estrellas', 'img/simbolo_conteo_estrellas.png');
             game.load.image('opciones_juego', 'img/opciones_juego.png');
             game.load.image('star', 'img/estrellas_recolectar_juego.png');
-
-            //Asteroides
-            // game.load.image('asteroide_derecha_grande', 'img/asteroide_derecha_grande.png');
-            // game.load.image('asteroide_izquierda_grande', 'img/asteroide_izquierda_grande.png');
-            // game.load.image('asteroide_derecha_pequeño', 'img/asteroide_derecha_pequeño.png');
-            // game.load.image('asteroide_izquierda_pequeño', 'img/asteroide_izquierda_pequeño.png');
             game.load.spritesheet('asteroids', 'img/asteroids.png', { frameWidth: 223, frameHeight: 226 });
 
         }
@@ -112,27 +106,37 @@ var app = {
 
         }
 
-        function asignarEventos() {
+        function asignarEventos(game) {
             //Pantalla Inicio
             btnContinuar.addEventListener("click", function () {
                 cambiarPantalla(pantalla_inicio, pantalla_mapa);
             });
             btnMusica.addEventListener("click", switchMusic);
             btnOpcionesInicio.addEventListener('click', function () {
+                btnVolverOpcionesCache = pantalla_inicio;
                 cambiarPantalla(pantalla_inicio, pantalla_opciones);
             });
 
             //Pantalla Mapa
             btnVolverMapa.addEventListener("click", function () {
+                btnVolverOpcionesCache = pantalla_mapa;
                 cambiarPantalla(pantalla_mapa, pantalla_inicio);
             });
             btnOpcionesMapa.addEventListener("click", function () {
+
                 cambiarPantalla(pantalla_mapa, pantalla_opciones);
             });
             btnMapa.addEventListener("click", function () {
+                if (gameOver) {
+                    gameOver = false;
+                    this.scene.restart();
+                }
+                else{
+                    this.scene.resume();
+                }
                 pause = false;
                 cambiarPantalla(pantalla_mapa, pantalla_game);
-            });
+            }.bind(game));
 
             //Pantalla Opciones
             btnOpcionMenu.addEventListener("click", function () {
@@ -145,15 +149,18 @@ var app = {
                 cambiarPantalla(pantalla_opciones, pantalla_creditos);
             });
             btnVolverOpciones.addEventListener("click", function () {
-                cambiarPantalla(pantalla_opciones, pantalla_inicio);
-            });
+                if (btnVolverOpcionesCache == pantalla_game) {
+                    this.scene.resume();
+                }
+                cambiarPantalla(pantalla_opciones, btnVolverOpcionesCache);
+            }.bind(game));
 
             //Pantalla Creditos
             btnVolverCreditos.addEventListener("click", function () {
                 cambiarPantalla(pantalla_creditos, pantalla_opciones);
             });
 
-            //Eventos de los botones para navegar e los modals box
+            //Eventos de los botones para navegar en los modals box
             btn_der_estadisticas.addEventListener("click", function () {
                 let screen1 = document.getElementById("secretosBaldur");
                 let screen2 = document.getElementById("estadisticasBaldur");
@@ -175,6 +182,18 @@ var app = {
                 changeCard(screen1, screen2);
             });
 
+            //Eventos de las opciones de pantalla de resultado
+            btn_restart.addEventListener("click", function () {
+                resultado_juego.className = "oculto";
+                pause = false;
+                gameOver = false;
+                this.scene.restart();
+            }.bind(game));
+            btn_volver.addEventListener("click", function () {
+                resultado_juego.className = "oculto";
+                cambiarPantalla(pantalla_game,pantalla_mapa);
+                this.scene.pause();
+            }.bind(game));
         }
 
         function switchMusic() {
@@ -184,7 +203,13 @@ var app = {
                     musicIsOn = false;
                     break;
                 case false:
-                    music.play();
+                    if(musicIsCreated){
+                        music.resume();
+                    }
+                    else{
+                        music.play();
+                        musicIsCreated = true;
+                    }
                     musicIsOn = true;
                     break;
                 default:
@@ -195,25 +220,20 @@ var app = {
         function create() {
             //Musica
             music = this.sound.add('theme');
-            music.play();
-            musicIsOn = true;
+            switchMusic();
 
             //Asignar el fondo del juego
             this.add.image(180, 320, 'fondo_juego');
 
-            //iconos del juego
-            this.add.image(24, 24, 'icono_estrellas').setOrigin(0);
-            scoreText = this.add.text(60, 30, '0', { fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5', fontSize: '15px' });
-
             //Grupo de estrellas
             var Star = new Phaser.Class({
 
-                Extends: Phaser.GameObjects.Image,
+                Extends: Phaser.Physics.Arcade.Image,
 
                 initialize:
 
                     function Star(scene) {
-                        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'star');
+                        Phaser.Physics.Arcade.Image.call(this, scene, 0, 0, 'star');
                     },
 
                 fire: function () {
@@ -239,84 +259,14 @@ var app = {
                 runChildUpdate: true
             });
 
-            //Clase Asteroide
-            // var Asteroide = new Phaser.Class({
-
-            //     Extends: Phaser.Physics.Arcade.Image,
-            //     initialize: function Asteroide() {
-            //     },
-            //     fire: function () {
-            //         this.setPosition(Phaser.Math.FloatBetween(20, 300), 5);
-            //         this.setActive(true);
-            //         this.setVisible(true);
-            //     },
-            //     update: function (time, delta) {
-            //         if (this.y > 660) {
-            //             this.setVisible(false);
-            //             this.setActive(false);
-            //         }
-            //     }
-            // });
-
-            //Clases de cada tipo de asteroide que extienden a la clase Asteroide
-            // var AstIzqGran = new Phaser.Class({
-
-            //     Extends: Asteroide,
-            //     initialize: function AstIzqGran(scene) {
-            //         Phaser.Physics.Arcade.Image.call(this, scene, 0, 0, 'asteroide_izquierda_grande');
-            //     },
-            //     setCircle: function () {
-            //         this.body.setCircle(110);
-            //     }
-
-            // });
-            // var AstIzqPeq = new Phaser.Class({
-
-            //     Extends: Asteroide,
-            //     initialize: function AstIzqGran(scene) {
-            //         Phaser.Physics.Arcade.Image.call(this, scene, 0, 0, 'asteroide_izquierda_pequeño');
-
-            //     },
-            //     setCircle: function () {
-            //         this.body.setCircle(80);
-            //     }
-            // });
-            // var AstDerGran = new Phaser.Class({
-
-            //     Extends: Asteroide,
-            //     initialize: function AstIzqGran(scene) {
-            //         Phaser.Physics.Arcade.Image.call(this, scene, 0, 0, 'asteroide_derecha_grande');
-            //     },
-            //     setCircle: function () {
-            //         this.body.setCircle(110);
-            //     }
-            // });
-            // var AstDerPeq = new Phaser.Class({
-
-            //     Extends: Asteroide,
-            //     initialize: function AstIzqGran(scene) {
-            //         Phaser.Physics.Arcade.Image.call(this, scene, 0, 0, 'asteroide_derecha_pequeño');
-
-            //     },
-            //     setCircle: function () {
-            //         this.body.setCircle(80);
-            //     }
-            // });
-
-            asteroids = this.physics.add.group(
-                {
-                    key: 'asteroids',
-                    frame: Phaser.Utils.Array.NumberArray(0, 3),
-                    max: 4,
-                    active: false,
-                    visible: false
-                }
-            );
-            console.log(asteroids);
-            // this.add(new AstIzqGran(this).setActive(false).setVisible(false),true);
-            // asteroids.add(new AstIzqPeq(this).setActive(false).setVisible(false),true);
-            // asteroids.add(new AstDerGran(this).setActive(false).setVisible(false),true);
-            // asteroids.add(new AstDerPeq(this).setActive(false).setVisible(false),true);
+            //Grupo de asteroides
+            asteroids = this.physics.add.group({
+                key: 'asteroids',
+                frame: Phaser.Utils.Array.NumberArray(0, 3),
+                maxSize: 4,
+                active: false,
+                visible: false
+            });
 
             //Personaje
             sprite = this.add.image(180, 560, 'dude');
@@ -338,18 +288,23 @@ var app = {
             this.physics.add.overlap(sprite, stars, collectStar, null, this);
 
             //Colsiones
-            // this.physics.add.collider(sprite, asteroids);
+            this.physics.add.collider(sprite, asteroids);
 
             //Detectar la colision entre Baldur y los asteroides
-            // this.physics.add.overlap(sprite, asteroids, collision, null, this);
+            this.physics.add.overlap(sprite, asteroids, collision, null, this);
+
+            //iconos del juego
+            this.add.image(24, 24, 'icono_estrellas').setOrigin(0);
+            scoreText = this.add.text(60, 30, '0', { fontFamily: 'Akrobat', fontStyle: '900', color: '#ecdeb5', fontSize: '15px' });
 
             //Botones acciones
             btnOpciones = this.add.sprite(308, 24, 'opciones_juego').setInteractive();
             btnOpciones.setOrigin(0);
             btnOpciones.on('pointerdown', function () {
-                //asteroids.setVelocity(0, 0);
-                //cambiarPantalla(pantalla_game, pantalla_opciones);
-            });
+                btnVolverOpcionesCache = pantalla_game;
+                this.scene.pause();
+                cambiarPantalla(pantalla_game, pantalla_opciones);
+            }.bind(this));
 
         }
 
@@ -361,15 +316,19 @@ var app = {
                     switch (rdn) {
                         case 1:
                             star.setScale(1);
+                            star.setCircle(15);
                             break;
                         case 2:
                             star.setScale(1.3);
+                            star.setCircle(15);
                             break;
                         case 3:
                             star.setScale(1.6);
+                            star.setCircle(15);
                             break;
                         case 4:
                             star.setScale(2);
+                            star.setCircle(15);
                             break;
                         default:
                             break;
@@ -384,15 +343,19 @@ var app = {
 
         function createAsteroids() {
             if (gameOver == false && pause == false) {
-                asteroid = asteroids.get();
+                asteroid = asteroids.getLast();
                 if (asteroid) {
-                    console.log(asteroid);
+                    console.log(asteroid.frame.name);
                     asteroid.setPosition(Phaser.Math.FloatBetween(20, 300), 5)
                         .setActive(true)
                         .setVisible(true)
-                        .setVelocity(0, 60)
-                        .setOrigin(0)
-                        .body.setCircle(80);
+                        .setVelocity(0, 60);
+                    if (asteroid.frame.name == 0 || asteroid.frame.name == 2) {
+                        asteroid.body.setCircle(100);
+                    }
+                    else {
+                        asteroid.body.setCircle(75);
+                    }
                 }
             }
         }
@@ -411,10 +374,10 @@ var app = {
             gameOver = true;
             fails++;
 
+            saveGameData();
+
             asteroids.setVelocity(0, 0);
             stars.setVelocity(0, 0);
-
-            saveGameData();
 
             showModalBox();
         }
@@ -481,17 +444,15 @@ var app = {
                 this.x = dragX;
             });
 
-            // Phaser.Actions.IncY(asteroids.getChildren(), 1);
-
-            // asteroids.children.iterate(function (asteroid) {
-            //     if (asteroid.y > 600) {
-            //         asteroids.killAndHide(asteroid);
-            //     }
-            // });
-            // console.log("Used "+stars.getTotalUsed()+"\nFree "+ stars.getTotalFree()) ;
+            asteroids.children.iterate(function (asteroid) {
+                if (asteroid.y > 800) {
+                    asteroids.killAndHide(asteroid);
+                }
+            });
         }
 
         var game = new Phaser.Game(config);
+        cambiarPantalla(pantalla_carga, pantalla_inicio);
     },
 
     // Update DOM on a Received Event

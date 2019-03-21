@@ -3,7 +3,7 @@
   "display": "standalone",
   "name": "BALDUR",
   "short_name": "BALDUR",
-  "version": "io.cordova.BALDUR",
+  "version": "com.example.baldur",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "author": "Apache Cordova Team",
   "icons": [],
