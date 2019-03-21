@@ -49,10 +49,12 @@ img{
     position: absolute;
 }
 
-#nueva_partida{
-    position: absolute;
-    left: 270px;
-    top:560px;
+#prueba{
+
+position: absolute;
+left: 270px;
+top:560px;
+
 }
 
 #logo{
@@ -80,16 +82,18 @@ img{
     top: 290px;
 }
 
-.btnAbajo{
+.btnOpciones{
     position: absolute;
     bottom: 24px;
 }
 
-.btnLeft{
+#pantalla_inicio .btnOpciones{
     left: 24px;
 }
 
-.btnRight{
+#btnMusica{
+    position: absolute;
+    bottom: 24px;
     right: 24px;
 }
 
@@ -115,13 +119,6 @@ h3{
     font-weight: 100;
     font-size: 13pt;
     color: #ecdeb5;
-}
-p{
-    font-family: 'Akrobat';
-    font-style: normal;
-    font-weight: 100;
-    color: #ecdeb5;
-    font-size: 10pt;
 }
 
 #title{
@@ -172,14 +169,6 @@ p{
     right: 153px;
 }
 
-.txt_creditos{
-    position: absolute;
-    text-align: center;
-    font-size: 16px;
-    top: 147px;
-    left: 106px;
-}
-
 #txt_nivel{
     position: absolute;
     font-size: 27px;
@@ -187,8 +176,7 @@ p{
     text-align: center;
     top: 66px;
 }
-
-/*.tituloCreditos{
+.tituloCreditos{
     position: absolute;
     font-size: 16px;
     width: 100%;
@@ -215,7 +203,7 @@ p{
     width: 100%;
     text-align: center;
     top: 280px;
-} */
+}
 #mensaje_nivel{
     position: absolute;
     width: 100%;
@@ -286,6 +274,11 @@ p{
     margin: 7px 0px;
 }
 
+
+#pantalla_mapa .btnOpciones{
+    left: 147.5px;
+}
+
 #regresaInicio{
 
     left: 15px;
@@ -325,6 +318,7 @@ p{
 
 }
 #estrellas{
+
     top: 8px;
     left: -130px;
 }
@@ -339,168 +333,172 @@ p{
     left: 132px;
 }
 
-.boton_volver {
-    bottom: 24px;
-    left: 154px;
+#boton_volverMapa {
+    top: 468px;
+    left: 156px;
 }
-
+#boton_volverOpciones {
+    top: 468px;
+    left: 156px;
+}
 #simbolo_conteo_estrellas{
+
     top: 20px;
     left: 10px;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-Thin.eot');
-    src: url('../fonts/akrobat/Akrobat-Thin.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-Thin.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-Thin.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-Thin.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-Thin.svg#Akrobat-Thin') format('svg');
+    src: url('../font/akrobat/Akrobat-Thin.eot');
+    src: url('../font/akrobat/Akrobat-Thin.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Thin.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Thin.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Thin.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Thin.svg#Akrobat-Thin') format('svg');
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-ExtraBold.eot');
-    src: url('../fonts/akrobat/Akrobat-ExtraBold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-ExtraBold.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-ExtraBold.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-ExtraBold.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-ExtraBold.svg#Akrobat-ExtraBold') format('svg');
+    src: url('../font/akrobat/Akrobat-ExtraBold.eot');
+    src: url('../font/akrobat/Akrobat-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-ExtraBold.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-ExtraBold.woff') format('woff'),
+        url('../font/akrobat/Akrobat-ExtraBold.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-ExtraBold.svg#Akrobat-ExtraBold') format('svg');
     font-weight: 800;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-Bold.eot');
-    src: url('../fonts/akrobat/Akrobat-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-Bold.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-Bold.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-Bold.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-Bold.svg#Akrobat-Bold') format('svg');
+    src: url('../font/akrobat/Akrobat-Bold.eot');
+    src: url('../font/akrobat/Akrobat-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Bold.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Bold.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Bold.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Bold.svg#Akrobat-Bold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-Regular.eot');
-    src: url('../fonts/akrobat/Akrobat-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-Regular.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-Regular.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-Regular.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-Regular.svg#Akrobat-Regular') format('svg');
+    src: url('../font/akrobat/Akrobat-Regular.eot');
+    src: url('../font/akrobat/Akrobat-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Regular.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Regular.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Regular.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Regular.svg#Akrobat-Regular') format('svg');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-SemiBold.eot');
-    src: url('../fonts/akrobat/Akrobat-SemiBold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-SemiBold.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-SemiBold.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-SemiBold.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-SemiBold.svg#Akrobat-SemiBold') format('svg');
+    src: url('../font/akrobat/Akrobat-SemiBold.eot');
+    src: url('../font/akrobat/Akrobat-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-SemiBold.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-SemiBold.woff') format('woff'),
+        url('../font/akrobat/Akrobat-SemiBold.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-SemiBold.svg#Akrobat-SemiBold') format('svg');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-Light.eot');
-    src: url('../fonts/akrobat/Akrobat-Light.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-Light.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-Light.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-Light.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-Light.svg#Akrobat-Light') format('svg');
+    src: url('../font/akrobat/Akrobat-Light.eot');
+    src: url('../font/akrobat/Akrobat-Light.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Light.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Light.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Light.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Light.svg#Akrobat-Light') format('svg');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-Black.eot');
-    src: url('../fonts/akrobat/Akrobat-Black.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-Black.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-Black.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-Black.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-Black.svg#Akrobat-Black') format('svg');
+    src: url('../font/akrobat/Akrobat-Black.eot');
+    src: url('../font/akrobat/Akrobat-Black.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Black.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Black.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Black.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Black.svg#Akrobat-Black') format('svg');
     font-weight: 900;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Akrobat';
-    src: url('../fonts/akrobat/Akrobat-ExtraLight.eot');
-    src: url('../fonts/akrobat/Akrobat-ExtraLight.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/akrobat/Akrobat-ExtraLight.woff2') format('woff2'),
-        url('../fonts/akrobat/Akrobat-ExtraLight.woff') format('woff'),
-        url('../fonts/akrobat/Akrobat-ExtraLight.ttf') format('truetype'),
-        url('../fonts/akrobat/Akrobat-ExtraLight.svg#Akrobat-ExtraLight') format('svg');
+    src: url('../font/akrobat/Akrobat-ExtraLight.eot');
+    src: url('../font/akrobat/Akrobat-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-ExtraLight.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-ExtraLight.woff') format('woff'),
+        url('../font/akrobat/Akrobat-ExtraLight.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-ExtraLight.svg#Akrobat-ExtraLight') format('svg');
     font-weight: 200;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exodus Sharpen';
-    src: url('../fonts/exodus/ExodusDemo-Sa.eot');
-    src: url('../fonts/exodus/ExodusDemo-Sa.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/exodus/ExodusDemo-Sa.woff2') format('woff2'),
-        url('../fonts/exodus/ExodusDemo-Sa.woff') format('woff'),
-        url('../fonts/exodus/ExodusDemo-Sa.ttf') format('truetype'),
-        url('../fonts/exodus/ExodusDemo-Sa.svg#ExodusDemo-Sa') format('svg');
+    src: url('../font/exodus/ExodusDemo-Sa.eot');
+    src: url('../font/exodus/ExodusDemo-Sa.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Sa.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Sa.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Sa.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Sa.svg#ExodusDemo-Sa') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exodus Striped';
-    src: url('../fonts/exodus/ExodusDemo-St.eot');
-    src: url('../fonts/exodus/ExodusDemo-St.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/exodus/ExodusDemo-St.woff2') format('woff2'),
-        url('../fonts/exodus/ExodusDemo-St.woff') format('woff'),
-        url('../fonts/exodus/ExodusDemo-St.ttf') format('truetype'),
-        url('../fonts/exodus/ExodusDemo-St.svg#ExodusDemo-St') format('svg');
+    src: url('../font/exodus/ExodusDemo-St.eot');
+    src: url('../font/exodus/ExodusDemo-St.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-St.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-St.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-St.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-St.svg#ExodusDemo-St') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exodus Regular';
-    src: url('../fonts/exodus/ExodusDemo-Regular.eot');
-    src: url('../fonts/exodus/ExodusDemo-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/exodus/ExodusDemo-Regular.woff2') format('woff2'),
-        url('../fonts/exodus/ExodusDemo-Regular.woff') format('woff'),
-        url('../fonts/exodus/ExodusDemo-Regular.ttf') format('truetype'),
-        url('../fonts/exodus/ExodusDemo-Regular.svg#ExodusDemo-Regular') format('svg');
+    src: url('../font/exodus/ExodusDemo-Regular.eot');
+    src: url('../font/exodus/ExodusDemo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Regular.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Regular.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Regular.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Regular.svg#ExodusDemo-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exodus Shino';
-    src: url('../fonts/exodus/ExodusDemo-Sh.eot');
-    src: url('../fonts/exodus/ExodusDemo-Sh.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/exodus/ExodusDemo-Sh.woff2') format('woff2'),
-        url('../fonts/exodus/ExodusDemo-Sh.woff') format('woff'),
-        url('../fonts/exodus/ExodusDemo-Sh.ttf') format('truetype'),
-        url('../fonts/exodus/ExodusDemo-Sh.svg#ExodusDemo-Sh') format('svg');
+    src: url('../font/exodus/ExodusDemo-Sh.eot');
+    src: url('../font/exodus/ExodusDemo-Sh.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Sh.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Sh.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Sh.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Sh.svg#ExodusDemo-Sh') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exodus Stencil';
-    src: url('../fonts/exodus/ExodusDemo-Stencil.eot');
-    src: url('../fonts/exodus/ExodusDemo-Stencil.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/exodus/ExodusDemo-Stencil.woff2') format('woff2'),
-        url('../fonts/exodus/ExodusDemo-Stencil.woff') format('woff'),
-        url('../fonts/exodus/ExodusDemo-Stencil.ttf') format('truetype'),
-        url('../fonts/exodus/ExodusDemo-Stencil.svg#ExodusDemo-Stencil') format('svg');
+    src: url('../font/exodus/ExodusDemo-Stencil.eot');
+    src: url('../font/exodus/ExodusDemo-Stencil.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Stencil.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Stencil.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Stencil.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Stencil.svg#ExodusDemo-Stencil') format('svg');
     font-weight: normal;
     font-style: normal;
 }

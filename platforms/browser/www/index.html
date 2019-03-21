@@ -1,103 +1,156 @@
 <!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
-    <head>
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="css/animate.css">
 
-        <title>BALDUR</title>
-    </head>
-    <body>
-        <div id="app" class="app">
-            <div id="pantalla_carga" class="pantalla oculto">
-                <img id="logo" src="img/logo.png" class="img" alt="">
-                <img id="cargando" src="img/elemento_cargando.png" class="img" alt="">
-                <h2 id="texto_carga">
-                    ...dios de la paz, la pureza, la <br>
-                    justicia y <strong>la luz...</strong></h2>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content: blob:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Hello World</title>
+</head>
+
+<body>
+    <div id="pantalla_carga" class="pantalla oculto">
+        <img id="logo" src="img/logo.png" class="img" alt="">
+        <img id="cargando" src="img/elemento_cargando.png" class="img" alt="">
+        <h2 id="texto_carga">
+            ...dios de la paz, la pureza, la <br>
+            justicia y <strong>la luz...</strong></h2>
+    </div>
+
+    <div id="pantalla_inicio" class="pantalla oculto">
+        <h1 id="title">BALDUR</h1>
+        <h3 id="subtitle">Combate la oscuridad con el poder de las estrellas</h3>
+        <img src="img/boton_continuar.png" id="btnContinuar" class="img" alt="">
+        <img src="img/boton_opciones.png" id="btnOpcionesInicio" class="btnAbajo btnLeft" alt="">
+        <img src="img/musica_on.png" alt="" id="btnMusica" class="btnAbajo btnRight">
+        <img src="" alt="" id="btnCreditos">
+    </div>
+
+    <div id="pantalla_opciones" class="pantalla oculto">
+        <h2 id="txt_opciones">OPCIONES</h2>
+        <img src="img/opcion_menu.png" alt="" id="opcion_menu" class="opcion_arriba opcion_izquierda">
+        <img src="img/opcion_personajes.png" alt="" id="opcion_personajes" class="opcion_arriba opcion_derecha">
+        <img src="img/opcion_musica_on.png" alt="" id="opcion_musica" class="opcion_abajo opcion_izquierda">
+        <img src="img/opcion_creditos.png" alt="" id="opcion_creditos" class="opcion_abajo opcion_derecha">
+        <img src="img/boton_volver.png" alt="" id="boton_volverOpciones" class="boton_volver">
+    </div>
+
+    <div id="pantalla_mapa" class="pantalla oculto">
+        <h2 id="txt_nivel">SOWELU</h2>
+        <h3 id="mensaje_nivel">El sol al final del camino</h3>
+        <img src="img/mapa_juego1.png" alt="" id="boton_mapa">
+        <img src="img/boton_opciones.png" id="btnOpcionesMapa" class="btnAbajo btnLeft" alt="">
+        <img src="img/boton_volver.png" alt="" id="boton_volverMapa" class="btnAbajo btnRight">
+    </div>
+
+    <div id="pantalla_creditos" class="pantalla oculto">
+        <h2 id="txt_nivel">Créditos</h2>
+        <div class="txt_creditos">
+            <h3>Concepto, diseño,<br>dirección y gráficos</h3>
+            <p>Daniela Hurtado Herrera</p>
+            <h3>Programación</h3>
+            <p>Daniel F. Preciado Tamayo <br>José Manuel Echeverri Palacio</p>
+        </div>
+
+        <img src="img/elemento_creditos.png" alt="" id="imgCreditos">
+        <img src="img/boton_volver.png" alt="" id="boton_volverCreditos" class="boton_volver">
+    </div>
+
+    <div id="pantalla_personaje" class="pantalla oculto">
+        <h2 id="txt_nivel">PERSONAJES</h2>
+        <h3 id="estrellas" class="tituloCreditos">1</h3>
+        <img src="img/rostro_personaje_grande.png" alt="" id="rostro1">
+        <img src="img/simbolo_conteo_estrellas.png" alt="" id="simbolo_conteo_estrellas">
+        <img src="img/boton_seleccionar.png" alt="" id="boton_seleccionar">
+        <img src="img/boton_volver.png" alt="" id="boton_volverPersonaje">
+    </div>
+
+    <div id="pantalla_game" class="pantalla">
+        <div id="resultado_juego" class="modal_box oculto">
+            <div id="contenedor_ganaste" class="contenedor_resultado oculto">
+                <h1 id="txt_ganaste">GANASTE</h1>
+            </div>
+            <div id="contenedor_perdiste" class="contenedor_resultado oculto">
+                <h1 id="txt_ganaste">PERDISTE</h1>
+            </div>
+            <div id="secretosBaldur" class="contenedor_info oculto">
+                <div class="card" id="consejos">
+                    <h2>LOS SECRETOS DE BALDUR <br>
+                        Algunos secretos para empezar a jugar</h2>
+
+                    <p>
+                        -Mueve el dedo por la pantalla para deslizarte <br>
+                        -Evita los encuentros indeseados <br>
+                        -Obten una recompensa al recolectar muchas estrellas <br>
+                        -Nuevos mundos y nuevos desafios
+                    </p>
+                    <input class="btnDer" id="moverDerEstadistica" type="image" src="img/flecha_mover_derecha.png">
                 </div>
-            <div id="pantalla_inicio" class="pantalla oculto">
-                <h1 id="title">BALDUR</h1>
-                <h3 id="subtitle">Combate la oscuridad con el poder de las estrellas</h3>
-                <img src="img/boton_continuar.png" id="btnContinuar" class="img" alt="">
-                <img src="img/boton_opciones.png" class="btnOpciones" class="img" alt="">
-                <img src="img/musica_on.png" alt="" id="btnMusica">
-                <img src="" alt="" id="btnCreditos">
             </div>
-            <div id="pantalla_opciones" class="pantalla oculto">
-                <h2 id="txt_opciones">OPCIONES</h2>
-                <img src="img/opcion_menu.png" alt="" id="opcion_menu" class="opcion_arriba opcion_izquierda">
-                <img src="img/opcion_personajes.png" alt="" id="opcion_personajes" class="opcion_arriba opcion_derecha">
-                <img src="img/opcion_musica_on.png" alt="" id="opcion_musica" class="opcion_abajo opcion_izquierda">
-                <img src="img/opcion_creditos.png" alt="" id="opcion_creditos" class="opcion_abajo opcion_derecha">
-                <img src="img/boton_volver.png" alt="" id="boton_volver">
-            </div>
-
-            <div id="pantalla_mapa" class="pantalla oculto">
-                <h2 id="txt_nivel">SOWELU</h2>
-                <h3 id="mensaje_nivel">El sol al final del camino</h3>
-                <img src="img/mapa_juego1.png" alt="" id="boton_mapa">
-                <img src="img/boton_opciones.png" class="btnOpciones" class="img" alt="">
-
-            </div>
-
-            <div id="pantalla_game" class="pantalla">
-                    <div id="resultado_juego" class="modal_box oculto">
-                            <div id="contenedor_ganaste" class="contenedor_resultado oculto">
-                                <h1 id="txt_ganaste">GANASTE</h1>
-                            </div>
-                            <div id="contenedor_perdiste" class="contenedor_resultado oculto">
-                                <h1 id="txt_ganaste">PERDISTE</h1>
-                            </div>
-                            <div id="secretosBaldur" class="contenedor_info oculto">
-                                <div class="card" id="consejos">
-                                    <h2>LOS SECRETOS DE BALDUR <br>
-                                    Algunos secretos para empezar a jugar</h2>
-                                    
-                                    <p>
-                                        -Mueve el dedo por la pantalla para deslizarte <br>
-                                        -Evita los encuentros indeseados <br>
-                                        -Obten una recompensa al recolectar muchas estrellas <br>
-                                        -Nuevos mundos y nuevos desafios
-                                    </p>
-                                    <input class="btnDer" id="moverDerEstadistica" type="image"  src="img/flecha_mover_derecha.png">
-                                </div>
-                            </div>
-                            <div id="estadisticasBaldur" class="contenedor_info oculto">
-                                <div class="card" id="consejos">
-                                    <input class="btnIzq" id="moverIzqSecretos" type="image"  src="img/flecha_mover_izquierda.png">
-                                    <h2>Estadísticas<br>
-                                    Los Resultados De Tu Partida</h2>
-                                    <p>
-                                        Progreso: <strong id="progresoPartida"></strong> <br>
-                                        Fracasos: <strong id="fracasosPartida"></strong> <br>
-                                        Estrellas: <strong id="estrellasPartida"></strong><br>
-                                        CheckPoints: <strong id="checkPointsPartida"></strong>
-                                    </p>
-                                    <input class="btnDer" id="moverDerValoranos" type="image"  src="img/flecha_mover_derecha.png">
-                                </div>
-                            </div>
-                            <div id="valorarBaldur" class="contenedor_info oculto">
-                                <div class="card" id="consejos">
-                                    <input class="btnIzq" id="moverIzqEstadistica" type="image"  src="img/flecha_mover_izquierda.png">
-                                    <h2>Valoranos</h2>
-                                    <p>
-                                       Si te gusta nuestro juego,<br> 
-                                       valoralo para apoyarlo
-                                    </p>
-                                    <input id="btnValorar" class="" type="image"  src="img/boton_valorar.png">
-                                </div>
-                            </div>
-                            <input id="prueba" class="oculto" type="image"  src="img/boton_nueva_partida.png">
-                            <input id="regresaInicio" class="oculto" type="image" src="img/boton_volver.png">
-                    </div>
+            <div id="estadisticasBaldur" class="contenedor_info oculto">
+                <div class="card" id="consejos">
+                    <input class="btnIzq" id="moverIzqSecretos" type="image" src="img/flecha_mover_izquierda.png">
+                    <h2>Estadísticas<br>
+                        Los Resultados De Tu Partida</h2>
+                    <p>
+                        Progreso: <strong id="progresoPartida"></strong> <br>
+                        Fracasos: <strong id="fracasosPartida"></strong> <br>
+                        Estrellas: <strong id="estrellasPartida"></strong><br>
+                        CheckPoints: <strong id="checkPointsPartida"></strong>
+                    </p>
+                    <input class="btnDer" id="moverDerValoranos" type="image" src="img/flecha_mover_derecha.png">
                 </div>
             </div>
-        <script type="text/javascript" src="js/phaser.min.js"></script>
-        <script type="text/javascript" src="js/game.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+            <div id="valorarBaldur" class="contenedor_info oculto">
+                <div class="card" id="consejos">
+                    <input class="btnIzq" id="moverIzqEstadistica" type="image" src="img/flecha_mover_izquierda.png">
+                    <h2>Valoranos</h2>
+                    <p>
+                        Si te gusta nuestro juego,<br>
+                        valoralo para apoyarlo
+                    </p>
+                    <input id="btnValorar" class="" type="image" src="img/boton_valorar.png">
+                </div>
+            </div>
+            <input id="nueva_partida" class="oculto" type="image" src="img/boton_nueva_partida.png">
+            <input id="regresaInicio" class="oculto" type="image" src="img/boton_volver.png">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/phaser.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
 </html>
