@@ -1,0 +1,506 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+ * {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+#app{
+    background-color: #2e2e2e;
+    width: 360px;
+    height: 640px;
+}
+.pantalla{
+    width: 360px;
+    height: 640px;
+    position: relative;
+    background-color: #2e2e2e;
+    /**display: block;**/
+}
+
+.oculto{
+    display: none;
+}
+
+img{
+    position: absolute;
+}
+
+#prueba{
+
+position: absolute;
+left: 270px;
+top:560px;
+
+}
+
+#logo{
+    width: 162px;
+    height: 162px;
+    left: 27.5%;
+    top: 30%;
+}
+
+#cargando{
+    width: 83px;
+    height: 40px;
+    left: 38.4722%;
+    bottom: 35%;
+}
+
+#texto_carga{
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+}
+
+#btnContinuar{
+    left: 36.81%;
+    top: 290px;
+}
+
+.btnOpciones{
+    position: absolute;
+    bottom: 24px;
+}
+
+#pantalla_inicio .btnOpciones{
+    left: 24px;
+}
+
+#btnMusica{
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+}
+
+h1{
+    
+    font-family: 'Exodus Striped';
+    font-style: normal;
+    font-size: 55pt;
+    color: #ecdeb5;
+}
+
+h2{
+    font-family: 'Akrobat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16pt;
+    color: #ecdeb5;
+}
+
+h3{
+    font-family: 'Akrobat';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 13pt;
+    color: #ecdeb5;
+}
+
+#title{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 115px;
+    margin: 0;
+}
+
+#subtitle{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 205px;
+    margin: 0;
+}
+
+#txt_opciones{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 100px;
+    font-size: 28px;
+}
+
+.opcion_arriba{
+    position: absolute;
+    top: 200px;
+}
+
+.opcion_abajo{
+    position: absolute;
+    top: 380px;
+}
+
+.opcion_derecha{
+    right: 55px;
+}
+
+.opcion_izquierda{
+    left: 55px;
+}
+
+#boton_volver{
+    position: absolute;
+    bottom: 24px;
+    right: 153px;
+}
+
+#txt_nivel{
+    position: absolute;
+    font-size: 27px;
+    width: 100%;
+    text-align: center;
+    top: 66px;
+}
+.tituloCreditos{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 170px;
+}
+.parrafoCreditos{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 215px;
+}
+.tituloCreditos2{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 250px;
+}
+.parrafoCreditos2{
+    position: absolute;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    top: 280px;
+}
+#mensaje_nivel{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 105px;
+}
+
+#boton_mapa{
+    position: absolute;
+    top:180px;
+    left:137px;
+}
+
+.modal_box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor_resultado{
+    background-color: rgba(236, 222, 181, 0.8);
+    width: 100%;
+    height: 120px;
+    position: absolute;
+    top: 78px;
+}
+
+
+
+.contenedor_info{
+    background-color: rgba(75, 158, 131, 0.9);
+    width: 100%;
+    height: 180px;
+    position: absolute;
+    top: 230px;
+}
+
+#txt_ganaste{
+    margin: 15px 0;
+    position: absolute;
+    color: rgb(32, 41, 54);
+    font-size: 50pt;
+    width: 100%;
+    text-align: center;
+}
+
+.card{
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 70%;
+    height: 80%;
+    background-color: rgba(77, 73, 73, 0.2);
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.card h2{
+    font-size: 11pt;
+    margin: 5px 0px;
+}
+
+.card p{
+    font-family: 'Akrobat';
+    font-weight: 100;
+    color: #ecdeb5;
+    font-size: 10pt;
+    margin: 7px 0px;
+}
+
+
+#pantalla_mapa .btnOpciones{
+    left: 147.5px;
+}
+
+#regresaInicio{
+
+    left: 15px;
+    bottom: 15px;
+    position: absolute;
+    
+}
+
+.btnIzq{
+
+    display: inline;
+    position: absolute;
+    left: -30px;
+    top: 50px;
+    
+}
+
+.btnDer{
+
+    display: inline;
+    position: absolute;
+    left: 260px;
+    top: 50px;
+}
+
+#imgCreditos{
+
+    position: relative;
+    left: 35px;
+    top: 100px;
+}
+
+#boton_volverPersonaje{
+
+    top: 550px;
+    left: 156px;
+
+}
+#estrellas{
+
+    top: 8px;
+    left: -130px;
+}
+#boton_seleccionar{
+
+    top: 436px;
+    left: 138px;
+}
+
+#rostro1{
+    top: 196px;
+    left: 132px;
+}
+
+#boton_volverMapa {
+    top: 468px;
+    left: 156px;
+}
+#boton_volverOpciones {
+    top: 468px;
+    left: 156px;
+}
+#simbolo_conteo_estrellas{
+
+    top: 20px;
+    left: 10px;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-Thin.eot');
+    src: url('../font/akrobat/Akrobat-Thin.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Thin.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Thin.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Thin.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Thin.svg#Akrobat-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-ExtraBold.eot');
+    src: url('../font/akrobat/Akrobat-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-ExtraBold.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-ExtraBold.woff') format('woff'),
+        url('../font/akrobat/Akrobat-ExtraBold.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-ExtraBold.svg#Akrobat-ExtraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-Bold.eot');
+    src: url('../font/akrobat/Akrobat-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Bold.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Bold.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Bold.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Bold.svg#Akrobat-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-Regular.eot');
+    src: url('../font/akrobat/Akrobat-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Regular.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Regular.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Regular.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Regular.svg#Akrobat-Regular') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-SemiBold.eot');
+    src: url('../font/akrobat/Akrobat-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-SemiBold.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-SemiBold.woff') format('woff'),
+        url('../font/akrobat/Akrobat-SemiBold.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-SemiBold.svg#Akrobat-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-Light.eot');
+    src: url('../font/akrobat/Akrobat-Light.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Light.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Light.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Light.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Light.svg#Akrobat-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-Black.eot');
+    src: url('../font/akrobat/Akrobat-Black.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-Black.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-Black.woff') format('woff'),
+        url('../font/akrobat/Akrobat-Black.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-Black.svg#Akrobat-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akrobat';
+    src: url('../font/akrobat/Akrobat-ExtraLight.eot');
+    src: url('../font/akrobat/Akrobat-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('../font/akrobat/Akrobat-ExtraLight.woff2') format('woff2'),
+        url('../font/akrobat/Akrobat-ExtraLight.woff') format('woff'),
+        url('../font/akrobat/Akrobat-ExtraLight.ttf') format('truetype'),
+        url('../font/akrobat/Akrobat-ExtraLight.svg#Akrobat-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exodus Sharpen';
+    src: url('../font/exodus/ExodusDemo-Sa.eot');
+    src: url('../font/exodus/ExodusDemo-Sa.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Sa.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Sa.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Sa.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Sa.svg#ExodusDemo-Sa') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exodus Striped';
+    src: url('../font/exodus/ExodusDemo-St.eot');
+    src: url('../font/exodus/ExodusDemo-St.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-St.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-St.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-St.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-St.svg#ExodusDemo-St') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exodus Regular';
+    src: url('../font/exodus/ExodusDemo-Regular.eot');
+    src: url('../font/exodus/ExodusDemo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Regular.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Regular.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Regular.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Regular.svg#ExodusDemo-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exodus Shino';
+    src: url('../font/exodus/ExodusDemo-Sh.eot');
+    src: url('../font/exodus/ExodusDemo-Sh.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Sh.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Sh.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Sh.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Sh.svg#ExodusDemo-Sh') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exodus Stencil';
+    src: url('../font/exodus/ExodusDemo-Stencil.eot');
+    src: url('../font/exodus/ExodusDemo-Stencil.eot?#iefix') format('embedded-opentype'),
+        url('../font/exodus/ExodusDemo-Stencil.woff2') format('woff2'),
+        url('../font/exodus/ExodusDemo-Stencil.woff') format('woff'),
+        url('../font/exodus/ExodusDemo-Stencil.ttf') format('truetype'),
+        url('../font/exodus/ExodusDemo-Stencil.svg#ExodusDemo-Stencil') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+

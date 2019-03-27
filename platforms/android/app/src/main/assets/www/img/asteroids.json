@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "asteroids-0.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 892,
+				"h": 226
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "asteroide_derecha_grande.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 222,
+						"h": 226
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 222,
+						"h": 226
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 222,
+						"h": 226
+					}
+				},
+				{
+					"filename": "asteroide_derecha_pequeño.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 163,
+						"h": 161
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 163,
+						"h": 161
+					},
+					"frame": {
+						"x": 223,
+						"y": 0,
+						"w": 163,
+						"h": 161
+					}
+				},
+				{
+					"filename": "asteroide_izquierda_grande.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 223,
+						"h": 226
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 223,
+						"h": 226
+					},
+					"frame": {
+						"x": 446,
+						"y": 0,
+						"w": 223,
+						"h": 226
+					}
+				},
+				{
+					"filename": "asteroide_izquierda_pequeño.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 164,
+						"h": 161
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 164,
+						"h": 161
+					},
+					"frame": {
+						"x": 669,
+						"y": 0,
+						"w": 164,
+						"h": 161
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:198cff29c04ec2c55201e6c972b7e362:b62145d859d6df59287e0604ff7055cf:d1ece6d2742e5034c4bff04d7c9c8958$"
+	}
+}
